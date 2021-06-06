@@ -1,0 +1,13 @@
+/*
+  This file is original from qcom kalama-audio-mtp.dtsi
+*/
+
+#include "kalama-audio-overlay.dtsi"
+
+&fm_i2s1_gpios {
+	status = "ok";
+};
+
+&kalama_snd {
+	qcom,sec-mi2s-gpios = <&fm_i2s1_gpios>;
+};
