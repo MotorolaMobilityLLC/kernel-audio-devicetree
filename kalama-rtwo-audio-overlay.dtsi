@@ -1,3 +1,7 @@
+&fsa4480 {
+	status = "ok";
+};
+
 &kalama_snd {
 	qcom,model = "kalama-mtp-wsa883x-snd-card";
 	qcom,audio-routing =
