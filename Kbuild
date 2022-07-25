@@ -17,7 +17,8 @@ endif
 else
 
 dtbo-$(CONFIG_ARCH_KALAMA) += kalama-audio.dtbo
-dtbo-$(CONFIG_RTWO_DTB) += kalama-audio-moto-rtwo-evb1.dtbo
+dtbo-$(CONFIG_RTWO_DTB) += kalama-audio-moto-rtwo-evb1.dtbo \
+                           kalama-audio-moto-rtwo-dvt1b.dtbo
 
 endif  #($(CONFIG_MMI_DEVICE_DTBS),y)
 
