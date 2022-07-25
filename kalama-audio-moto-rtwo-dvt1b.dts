@@ -1,0 +1,15 @@
+/*
+   This file is derivated from kalama-audio-mtp.dts
+ */
+
+/dts-v1/;
+/plugin/;
+#define RTWO_RADIO_NA 3
+#define RTWO_RADIO_VZM 4
+#include "kalama-audio-moto-rtwo-common.dtsi"
+ / {
+	model = "rtwo";
+	compatible = "qcom,kalama-mtp", "qcom,kalama", "qcom,mtp", "mot,rtwo";
+	qcom,msm-id = <519 0x10000>, <536 0x10000>;
+	qcom,board-id = <0x41 0xB1B0>,  <(RTWO_RADIO_NA << 8 | 0x41) 0xA200>, <(RTWO_RADIO_VZM << 8 | 0x41) 0xA200>;
+};
