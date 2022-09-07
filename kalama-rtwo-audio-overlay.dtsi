@@ -68,6 +68,42 @@
     status = "disabled";
 };
 
+&spkr_02_sd_n_sleep {
+    mux {
+        pins = "gpio18";
+    };
+    config {
+        pins = "gpio18";
+    };
+};
+
+&spkr_02_sd_n_active {
+    mux {
+        pins = "gpio18";
+    };
+    config {
+        pins = "gpio18";
+    };
+};
+
+&spkr_13_sd_n_sleep {
+    mux {
+        pins = "gpio17";
+    };
+    config {
+        pins = "gpio17";
+    };
+};
+
+&spkr_13_sd_n_active {
+    mux {
+        pins = "gpio17";
+    };
+    config {
+        pins = "gpio17";
+    };
+};
+
 &swr0 {
 	wsa883x_0221: wsa883x@02170221 {
 		compatible = "qcom,wsa883x";
