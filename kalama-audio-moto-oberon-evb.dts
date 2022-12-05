@@ -23,3 +23,7 @@
 	qcom,msm-id = <519 0x10000>, <536 0x10000>, <519 0x20000>, <536 0x20000>;
 	qcom,board-id = <0x47 0x9000>;
 };
+
+&wcd938x_codec {
+    status = "disabled";
+};
