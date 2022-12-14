@@ -1,0 +1,6 @@
+/*
+  This file is original from qcom kalama-audio-mtp.dtsi
+*/
+
+#include "kalama-audio-overlay.dtsi"
+#include "kalama-oberon-audio-overlay.dtsi"
