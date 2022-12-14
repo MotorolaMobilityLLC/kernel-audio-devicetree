@@ -15,7 +15,7 @@
 /dts-v1/;
 /plugin/;
 
-#include "kalama-audio-moto-rtwo-common.dtsi"
+#include "kalama-audio-moto-oberon-common.dtsi"
 
 / {
 	model = "oberon";
