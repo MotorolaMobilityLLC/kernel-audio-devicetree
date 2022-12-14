@@ -1,0 +1,69 @@
+&fsa4480 {
+    status = "disabled";
+};
+
+&kalama_snd {
+	qcom,model = "kalama-mtp-wsa883x-snd-card";
+	qcom,audio-routing =
+		"WSA SRC0_INP", "SRC0",
+		"WSA_TX DEC0_INP", "TX DEC0 MUX",
+		"WSA_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"SpkrLeft IN", "WSA_SPK1 OUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK";
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&wsa883x_0221>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"wsa-codec1";
+
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,wsa-max-devs = <1>;
+};
+
+&wsa_macro {
+	qcom,wsa-bat-cfgs= <0>, <0>;
+};
+
+&wsa884x_0220 {
+    status = "disabled";
+};
+
+&wsa884x_0221 {
+    status = "disabled";
+};
+
+&swr0 {
+	wsa883x_0221: wsa883x@02170221 {
+		compatible = "qcom,wsa883x";
+		reg = <0x2 0x2170221>;
+		qcom,spkr-sd-n-node = <&wsa_spkr_en02>;
+		qcom,lpass-cdc-handle = <&lpass_cdc>;
+		cdc-vdd-1p8-supply = <&L15B>;
+		qcom,cdc-vdd-1p8-voltage = <1800000 1800000>;
+		qcom,cdc-vdd-1p8-current = <20000>;
+		qcom,cdc-static-supplies = "cdc-vdd-1p8";
+		sound-name-prefix = "SpkrLeft";
+	};
+
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&wsa884x_2_0220 {
+    status = "disabled";
+};
+
+&wsa884x_2_0221 {
+    status = "disabled";
+};
