@@ -1,0 +1,105 @@
+&wsa881x_i2c_e {
+    status = "disabled";
+};
+
+&wsa881x_i2c_44 {
+    status = "disabled";
+};
+
+&wsa881x_analog_clk_gpio {
+    status = "disabled";
+};
+
+&wsa881x_analog_reset_gpio {
+    status = "disabled";
+};
+
+&wsa881x_analog_clk {
+    status = "disabled";
+};
+
+
+&cdc_dmic01_gpios {
+    status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+    status = "disabled";
+};
+
+&qupv3_se1_i2c{
+        status = "okay";
+        aw882xxacf_rcv: aw882xx_smartpa@37 { /* SPKL */
+                compatible = "awinic,aw882xx_smartpa";
+                reg = <0x37>;
+                irq-gpio = <&tlmm 107 0x2008>;
+                sound-channel = <0>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+                aw-re-min = <4000>;
+                aw-re-max= <30000>;
+                rename-flag = <1>;
+                aw-cali-mode = "none";
+                monitor-mode = "hal_monitor";
+                status = "okay";
+        };
+        aw882xxacf_spk: aw882xx_smartpa@34 { /* SPKR */
+                compatible = "awinic,aw882xx_smartpa";
+                reg = <0x34>;
+                irq-gpio = <&tlmm 102 0x2008>;
+                sound-channel = <1>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+                aw-re-min = <4000>;
+                aw-re-max= <30000>;
+                rename-flag = <1>;
+                aw-cali-mode = "none";
+                monitor-mode = "hal_monitor";
+                status = "okay";
+        };
+};
+
+&bengal_snd {
+        qcom,model = "bengal-idp-snd-card";
+        qcom,mi2s-audio-intf = <1>;
+        qcom,msm-mi2s-master = <1>, <1>, <1>, <1>;
+        qcom,wcn-btfm = <1>;
+        qcom,va-bolero-codec = <1>;
+        qcom,rxtx-bolero-codec = <1>;
+        qcom,audio-routing =
+                "AMIC1", "Analog Mic1",
+                "AMIC1", "MIC BIAS1",
+                "AMIC2", "Analog Mic2",
+                "AMIC2", "MIC BIAS2",
+                "AMIC3", "Analog Mic3",
+                "AMIC3", "MIC BIAS3",
+                "IN1_HPHL", "HPHL_OUT",
+                "IN2_HPHR", "HPHR_OUT",
+                "IN3_AUX", "AUX_OUT",
+                "RX_TX DEC0_INP", "TX DEC0 MUX",
+                "RX_TX DEC1_INP", "TX DEC1 MUX",
+                "RX_TX DEC2_INP", "TX DEC2 MUX",
+                "RX_TX DEC3_INP", "TX DEC3 MUX",
+                "TX SWR_INPUT", "WCD_TX_OUTPUT",
+                "VA SWR_INPUT", "VA_SWR_CLK",
+                "VA SWR_INPUT", "WCD_TX_OUTPUT",
+                "TX_AIF1 CAP", "VA_SWR_CLK",
+                "TX_AIF2 CAP", "VA_SWR_CLK",
+                "TX_AIF3 CAP", "VA_SWR_CLK";
+
+        qcom,msm-mbhc-usbc-audio-supported = <0>;
+        qcom,msm-mbhc-hphl-swh = <1>;
+        qcom,msm-mbhc-gnd-swh = <1>;
+        qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+
+        nvmem-cells = <&adsp_variant>;
+        nvmem-cell-names = "adsp_variant";
+
+        asoc-codec  = <&stub_codec>, <&bolero_cdc>,
+                        <&wcd937x_codec>,
+                        <&aw882xxacf_spk>, <&aw882xxacf_rcv>;
+        asoc-codec-names = "msm-stub-codec.1", "bolero-codec",
+                        "wcd937x_codec",
+                        "aw882xx_smartpa.1-0034", "aw882xx_smartpa.1-0037";
+        qcom,wsa-max-devs = <0>;
+        //qcom,wsa-devs = <&wsa881x_i2c_e>;
+        qcom,wsa-aux-dev-prefix = "SpkrMono";
+        qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+                                <&bolero_cdc>;
+};
