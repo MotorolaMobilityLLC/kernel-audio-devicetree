@@ -55,6 +55,7 @@ dtbo-y +=  lemans-audio.dtbo
 endif
 endif
 
+ifneq ($(CONFIG_MMI_DEVICE_DTBS),y)
 ifeq ($(CONFIG_ARCH_KHAJE), y)
 dtbo-y += khaje-audio.dtbo \
 		khaje-audio-idp.dtbo \
@@ -72,6 +73,11 @@ dtbo-y += khaje-audio.dtbo \
 		khaje-audio-idp-pm8010.dtbo \
 		khaje-audio-idp-usbc.dtbo \
 		khaje-nowcd.dtbo
+endif
+else
+
+dtbo-$(CONFIG_ARCH_KHAJE) += khaje-audio.dtbo
+dtbo-$(CONFIG_RHODE_DTB) += khaje-audio-moto-rhode-evt.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_SDXPINN), y)
