@@ -78,6 +78,7 @@ else
 
 dtbo-$(CONFIG_ARCH_KHAJE) += khaje-audio.dtbo
 dtbo-$(CONFIG_RHODE_DTB) += khaje-audio-moto-rhode-evt.dtbo
+dtbo-$(CONFIG_FOGONA_DTB) += khaje-audio-moto-fogona-evt.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_SDXPINN), y)
