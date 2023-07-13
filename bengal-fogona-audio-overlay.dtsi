@@ -103,3 +103,8 @@
         qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
                                 <&bolero_cdc>;
 };
+&wcd937x_codec {
+        qcom,cdc-micbias1-mv = <2800>;
+        qcom,cdc-micbias2-mv = <2800>;
+        qcom,cdc-micbias3-mv = <2800>;
+};
