@@ -5,10 +5,16 @@
 /*  CONFIG_1S: BST_CFG1 & BST_CFG0 pin are both connected to GND */
 &wsa_macro {
     qcom,wsa-bat-cfgs= <1>, <1>;
+    qcom,wsa-system-gains= <1 9>, <1 9>;
 };
 
 /* copied from pineapple-audio-qrd.dtsi */
 &wcd939x_codec {
+        qcom,cdc-micbias1-mv = <2800>;
+        qcom,cdc-micbias2-mv = <2800>;
+        qcom,cdc-micbias3-mv = <2800>;
+        qcom,cdc-micbias4-mv = <2800>;
+
 	/* 0 for digital crosstalk disabled,
 	 * 1 for digital crosstalk with local sensed a-xtalk enabled, and
 	 * 2 for digital crosstalk with remote sensed a-xtalk enabled.
@@ -23,6 +29,10 @@
 	qcom,usbcss-hs-r7 = <5>;
 	qcom,usbcss-hs-lin-k-aud = <13>;
 	qcom,usbcss-hs-lin-k-gnd = <13>;
+};
+
+&wsa884x_0220 {
+       qcom,boost_voltage_11v;
 };
 
 &pineapple_snd {
