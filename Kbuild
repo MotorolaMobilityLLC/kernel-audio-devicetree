@@ -13,6 +13,14 @@ dtbo-y += kalama-audio.dtbo \
                  kalama-sg-audio-hhg.dtbo
 endif
 
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
+
+dtbo-y += pineapple-audio.dtbo
+
+dtbo-$(CONFIG_ARCF_DTB) += pineapple-audio-moto-arcf-evt1a.dtbo
+dtbo-$(CONFIG_CTWOV_DTB) += pineapple-audio-moto-ctwov-evb.dtbo
+
+else
 ifeq ($(CONFIG_ARCH_PINEAPPLE), y)
 dtbo-y += pineapple-audio.dtbo \
                  pineapple-audio-cdp.dtbo \
@@ -49,6 +57,8 @@ dtbo-y += pitti-audio.dtbo \
                  pitti-audio-qrd.dtbo \
                  pitti-audio-atp.dtbo
 endif
+endif # endof of CONFIG_MMI_DEVICE_DTBS
+
 
 ifeq ($(CONFIG_ARCH_SA8155), y)
 dtbo-y +=  sa8155-audio.dtbo
