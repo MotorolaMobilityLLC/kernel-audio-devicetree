@@ -1,0 +1,11 @@
+/* This is original from pineapple-audio-mtp.dtsi */
+
+#include "pineapple-audio-overlay.dtsi"
+
+&fm_i2s1_gpios {
+	status = "ok";
+};
+
+&pineapple_snd {
+	qcom,sec-mi2s-gpios = <&fm_i2s1_gpios>;
+};
