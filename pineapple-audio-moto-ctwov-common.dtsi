@@ -2,6 +2,58 @@
 
 #include "pineapple-audio-overlay.dtsi"
 
+&cdc_dmic01_gpios {
+    status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+    status = "disabled";
+};
+
+&cdc_dmic45_gpios {
+    status = "disabled";
+};
+
+&cdc_dmic67_gpios {
+    status = "disabled";
+};
+
+&cdc_pri_mi2s_gpios {
+	status = "disabled";
+};
+
+&fm_i2s1_gpios {
+	status = "disabled";
+};
+
+&cdc_tert_mi2s_gpios {
+	status = "disabled";
+};
+
+&cdc_quat_mi2s_gpios {
+	status = "disabled";
+};
+
+&cdc_quin_mi2s_gpios {
+	status = "disabled";
+};
+
+&cdc_sen_mi2s_gpios {
+	status = "disabled";
+};
+
+&cdc_sep_mi2s_gpios {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&wsa2_swr_gpios {
+    status = "disabled";
+};
+
 /*  CONFIG_1S: BST_CFG1 & BST_CFG0 pin are both connected to GND */
 &wsa_macro {
     qcom,wsa-rloads= <1>, <1>;
@@ -37,6 +89,7 @@
 };
 
 &pineapple_snd {
+        qcom,mi2s-audio-intf = <0>;
 		qcom,audio-routing =
 			"AMIC1", "Analog Mic1",
 			"AMIC1", "MIC BIAS1",
