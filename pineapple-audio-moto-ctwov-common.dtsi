@@ -56,7 +56,6 @@
 
 /*  CONFIG_1S: BST_CFG1 & BST_CFG0 pin are both connected to GND */
 &wsa_macro {
-    qcom,wsa-rloads= <1>, <1>;
     qcom,wsa-bat-cfgs= <1>, <1>;
     qcom,wsa-system-gains= <1 9>, <1 9>;
 };
