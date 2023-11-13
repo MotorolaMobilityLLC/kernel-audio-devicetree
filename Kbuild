@@ -16,9 +16,13 @@ endif
 ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 
 dtbo-y += pineapple-audio.dtbo
+dtbo-y += cliffs-audio.dtbo
 
 dtbo-$(CONFIG_ARCF_DTB) += pineapple-audio-moto-arcf-evt1a.dtbo
 dtbo-$(CONFIG_CTWOV_DTB) += pineapple-audio-moto-ctwov-evb.dtbo
+
+dtbo-$(CONFIG_ARCFOX_DTB) += cliffs-audio-moto-arcfox-evt3.dtbo
+dtbo-$(CONFIG_CTWO_DTB) += cliffs-audio-moto-ctwo-evb3.dtbo
 
 else
 ifeq ($(CONFIG_ARCH_PINEAPPLE), y)
