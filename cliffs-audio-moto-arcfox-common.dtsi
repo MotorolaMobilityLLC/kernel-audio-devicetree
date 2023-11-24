@@ -2,27 +2,54 @@
 
 #include "cliffs-audio-overlay.dtsi"
 
+&wcd_usbss {
+	status = "disabled";
+};
+
+&wcd_rst_gpio {
+	status = "disabled";
+};
+
+&wcd937x_codec {
+	status = "disabled";
+};
+
+&wcd937x_tx_slave {
+	status = "disabled";
+};
+
+&wcd937x_rx_slave {
+	status = "disabled";
+};
+
+
 &fm_i2s1_gpios {
-	status = "ok";
+	status = "disabled";
+};
+
+&wsa_macro {
+	qcom,wsa-bat-cfgs= <1>, <1>;
+	qcom,wsa-system-gains= <1 9>, <1 9>;
+};
+
+&wsa884x_0220 {
+	qcom,boost_voltage_11v;
 };
 
 &pineapple_snd {
-	qcom,sec-mi2s-gpios = <&fm_i2s1_gpios>;
-	qcom,model = "cliffs-mtp-wsa883x-snd-card";
+	qcom,model = "cliffs-mtp-snd-card";
+	qcom,mi2s-audio-intf = <0>;
+	qcom,wcd-disabled = <1>;
 	qcom,audio-routing =
-		"AMIC2", "Analog Mic2",
-		"AMIC2", "MIC BIAS2",
 		"TX DMIC0", "Digital Mic0",
-		"TX DMIC0", "MIC BIAS3",
 		"TX DMIC1", "Digital Mic1",
-		"TX DMIC1", "MIC BIAS3",
 		"TX DMIC2", "Digital Mic2",
-		"TX DMIC2", "MIC BIAS1",
 		"TX DMIC3", "Digital Mic3",
-		"TX DMIC3", "MIC BIAS1",
-		"IN1_HPHL", "HPHL_OUT",
-		"IN2_HPHR", "HPHR_OUT",
-		"IN3_AUX", "AUX_OUT",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"HAP_IN", "PCM_OUT",
 		"WSA SRC0_INP", "SRC0",
 		"WSA_TX DEC0_INP", "TX DEC0 MUX",
 		"WSA_TX DEC1_INP", "TX DEC1 MUX",
@@ -32,9 +59,7 @@
 		"RX_TX DEC3_INP", "TX DEC3 MUX",
 		"SpkrLeft IN", "WSA_SPK1 OUT",
 		"SpkrRight IN", "WSA_SPK2 OUT",
-		"TX SWR_INPUT", "WCD_TX_OUTPUT",
 		"VA SWR_INPUT", "VA_SWR_CLK",
-		"VA SWR_INPUT", "WCD_TX_OUTPUT",
 		"VA_AIF1 CAP", "VA_SWR_CLK",
 		"VA_AIF2 CAP", "VA_SWR_CLK",
 		"VA_AIF3 CAP", "VA_SWR_CLK",
@@ -42,61 +67,98 @@
 		"VA DMIC1", "Digital Mic1",
 		"VA DMIC2", "Digital Mic2",
 		"VA DMIC3", "Digital Mic3",
-		"VA DMIC0", "VA MIC BIAS3",
-		"VA DMIC1", "VA MIC BIAS3",
-		"VA DMIC2", "VA MIC BIAS1",
-		"VA DMIC3", "VA MIC BIAS1";
-		qcom,msm-mbhc-usbc-audio-supported = <0>;
-		qcom,msm-mbhc-hphl-swh = <1>;
-		qcom,msm-mbhc-gnd-swh = <1>;
-		asoc-codec  = <&stub_codec>, <&lpass_cdc>,
-			      <&wcd937x_codec>, <&wsa883x_0221>,
-			      <&wsa883x_0222>;
-		asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
-				   "wcd937x_codec", "wsa-codec1",
-				   "wsa-codec2";
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&swr_haptics>,
+			<&wsa884x_0220>, <&wsa884x_0221>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"swr-haptics",
+			"wsa-codec1", "wsa-codec2";
+	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
 };
 
-&swr0 {
-	qcom,swr-num-dev = <2>;
-
-	wsa884x_0220: wsa884x@02170220 {
-		status = "disabled";
-	};
-
-	wsa884x_0221: wsa884x@02170221 {
-		status = "disabled";
-	};
-
-	wsa883x_0221: wsa883x@02170221 {
-		status = "okay";
-	};
-
-	wsa883x_0222: wsa883x@02170222 {
-		status = "okay";
+&spf_core_platform  {
+	micbias_en_gpio: micbias_en_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&cdc_micbias_en_active>;
+		pinctrl-1 = <&cdc_micbias_en_sleep>;
+		#gpio-cells = <0>;
 	};
 };
 
-&wcd939x_codec {
-	status = "disabled";
+&tlmm {
+	cdc_micbias_en_active: micbias_en_active {
+		mux {
+			pins = "gpio119";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <8>;
+			output-high;
+		};
+	};
+
+	cdc_micbias_en_sleep: micbias_en_sleep {
+		mux {
+			pins = "gpio119";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
 };
 
-&wcd939x_tx_slave {
-	status = "disabled";
+&lpi_tlmm {
+	/* WSA speaker - north reset pins */
+	spkr_1_sd_n {
+		spkr_1_sd_n_sleep {
+			mux {
+				pins = "gpio5";
+			};
+			config {
+				pins = "gpio5";
+			};
+		};
+
+		spkr_1_sd_n_active {
+			mux {
+				pins = "gpio5";
+			};
+			config {
+				pins = "gpio5";
+			};
+		};
+	};
 };
 
-&wcd939x_rx_slave {
-	status = "disabled";
+&spkr_2_sd_n_sleep {
+	mux {
+		pins = "gpio76";
+	};
+	config {
+		pins = "gpio76";
+	};
 };
 
-&wcd937x_codec {
-	status = "okay";
-};
-
-&wcd937x_tx_slave {
-	status = "okay";
-};
-
-&wcd937x_rx_slave {
-	status = "okay";
+&spkr_2_sd_n_active {
+	mux {
+		pins = "gpio76";
+	};
+	config {
+		pins = "gpio76";
+	};
 };
