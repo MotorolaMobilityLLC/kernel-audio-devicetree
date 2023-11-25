@@ -22,6 +22,13 @@
 	status = "disabled";
 };
 
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
 
 &fm_i2s1_gpios {
 	status = "disabled";
@@ -49,7 +56,6 @@
 		"TX DMIC5", "Digital Mic5",
 		"TX DMIC6", "Digital Mic6",
 		"TX DMIC7", "Digital Mic7",
-		"HAP_IN", "PCM_OUT",
 		"WSA SRC0_INP", "SRC0",
 		"WSA_TX DEC0_INP", "TX DEC0 MUX",
 		"WSA_TX DEC1_INP", "TX DEC1 MUX",
@@ -120,6 +126,11 @@
 			output-low;
 		};
 	};
+};
+
+&rx_swr_gpios {
+	pinctrl-0 = <&rx_swr_clk_active &rx_swr_data_active>;
+	pinctrl-1 = <&rx_swr_clk_sleep &rx_swr_data_sleep>;
 };
 
 &lpi_tlmm {
