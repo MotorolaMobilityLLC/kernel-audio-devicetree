@@ -94,11 +94,18 @@ dtbo-y += khaje-audio.dtbo \
 endif
 
 ifeq ($(CONFIG_ARCH_BLAIR), y)
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
+
+dtbo-y += blair-audio.dtbo
+
+dtbo-$(CONFIG_MALMO_DTB) += blair-audio-moto-malmo-evb.dtbo
+else
 dtbo-y += blair-audio.dtbo \
 		blair-audio-mtp.dtbo \
 		blair-audio-mtp-usbc.dtbo \
 		blair-audio-qrd.dtbo \
 		blair-audio-cdp.dtbo
+endif # endof of CONFIG_MMI_DEVICE_DTBS
 endif
 
  always-y    := $(dtb-y) $(dtbo-y)
