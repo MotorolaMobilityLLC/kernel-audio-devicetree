@@ -22,6 +22,10 @@
 	status = "disabled";
 };
 
+&swr_haptics {
+	status = "ok";
+};
+
 /* Not overrided for both wsa reset pin */
 &spkr_1_sd_n_sleep {
 	mux {
