@@ -144,7 +144,7 @@
 				"wsa-codec1", "wsa-codec2";
 
 	qcom,msm-mbhc-usbc-audio-supported = <1>;
-	qcom,msm-mbhc-hphl-swh = <0>;
-	qcom,msm-mbhc-gnd-swh = <0>;
+	qcom,msm-mbhc-hphl-swh = <1>;
+	qcom,msm-mbhc-gnd-swh = <1>;
 	qcom,wcd-disable-legacy-surge;
 };
