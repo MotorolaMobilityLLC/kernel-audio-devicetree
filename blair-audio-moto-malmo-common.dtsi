@@ -55,9 +55,9 @@
 		"VA_AIF2 CAP", "VA_SWR_CLK",
 		"VA_AIF3 CAP", "VA_SWR_CLK";
 
-	qcom,msm-mbhc-usbc-audio-supported = <0>;
-	qcom,msm-mbhc-hphl-swh = <1>;
-	qcom,msm-mbhc-gnd-swh = <1>;
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
 
 	/delete-property/ qcom,cdc-dmic01-gpios;
 	/delete-property/ qcom,cdc-dmic23-gpios;
@@ -74,5 +74,57 @@
 
 	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
 								<&bolero_cdc>;
+
+	fsa4480-i2c-handle = <&fsa4480>;
 };
 
+&fsa4480{
+	status = "okay";
+};
+
+&qupv3_se10_i2c {
+        status = "okay";
+	fs16xx@34 {
+		status = "ok";
+		compatible = "foursemi,fs16xx";
+		reg = <0x34>;
+		fsm,rst-gpio = <&tlmm 59 0>;
+		pinctrl-names = "fsm_sdz_default";
+		pinctrl-0 = <&fsm_gpio_sdz1>;
+	};
+	fs16xx@35 {
+		status = "ok";
+		compatible = "foursemi,fs16xx";
+		reg = <0x35>;
+		fsm,rst-gpio = <&tlmm 48 0>;
+		pinctrl-names = "fsm_sdz_default";
+		pinctrl-0 = <&fsm_gpio_sdz0>;
+	};
+};
+
+&tlmm {
+	fsm_gpio_sdz0:fsm_gpio_sdz0{
+		mux{
+			pins = "gpio48";
+			function = "gpio";
+		};
+		config{
+			pins = "gpio48";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+	fsm_gpio_sdz1:fsm_gpio_sdz1{
+		mux{
+			pins = "gpio59";
+			function = "gpio";
+		};
+		config{
+			pins = "gpio59";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+};
