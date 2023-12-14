@@ -98,6 +98,7 @@
 
 &pineapple_snd {
 	qcom,model = "cliffs-mtp-snd-card";
+	qcom,ext-disp-audio-rx = <1>;
 	qcom,mi2s-audio-intf = <0>;
 	qcom,audio-routing =
 			"AMIC1", "Analog Mic1",
