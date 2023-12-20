@@ -85,15 +85,23 @@
 	 * 2 for digital crosstalk with remote sensed a-xtalk enabled.
 	 */
 	qcom,usbcss-hs-xtalk-config = <2>;
-	qcom,usbcss-hs-rdson = <600>;
-	qcom,usbcss-hs-r2 = <7550>;
-	qcom,usbcss-hs-r3 = <1>;
-	qcom,usbcss-hs-r4 = <330>;
-	qcom,usbcss-hs-r5 = <5>;
-	qcom,usbcss-hs-r6 = <1>;
-	qcom,usbcss-hs-r7 = <5>;
+	qcom,usbcss-hs-rdson-3p6v = <545>;
+	qcom,usbcss-hs-rdson-6v = <500>;
+	qcom,usbcss-hs-r1-l = <0>;
+	qcom,usbcss-hs-r1-r = <0>;
+	qcom,usbcss-hs-r3-l = <1>;
+	qcom,usbcss-hs-r3-r = <1>;
+	qcom,usbcss-hs-r4-sbu1 = <530>;
+	qcom,usbcss-hs-r4-sbu2 = <530>;
+	qcom,usbcss-hs-r5-sbu1 = <5>;
+	qcom,usbcss-hs-r5-sbu2 = <5>;
+	qcom,usbcss-hs-r6-sbu1 = <1>;
+	qcom,usbcss-hs-r6-sbu2 = <1>;
+	qcom,usbcss-hs-r7-sbu1 = <5>;
+	qcom,usbcss-hs-r7-sbu2 = <5>;
+	qcom,usbcss-hs-rcom-margin = <500>;
+	qcom,usbcss-hs-diff-slope = <9898>;
 	qcom,usbcss-hs-lin-k-aud = <13>;
-	qcom,usbcss-hs-lin-k-gnd = <13>;
 };
 
 &pineapple_snd {
