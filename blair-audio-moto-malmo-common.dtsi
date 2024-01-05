@@ -29,6 +29,11 @@
 	status = "disabled";
 };
 
+&wcd937x_codec {
+	qcom,cdc-micbias1-mv = <2500>;
+	qcom,cdc-micbias2-mv = <2700>;
+	qcom,cdc-micbias3-mv = <2500>;
+};
 
 &holi_snd {
 	qcom,model = "blair-qrd-snd-card";
@@ -128,33 +133,16 @@
 			output-low;
 		};
 	};
-	hac_enable {
-		hac_enable_sleep: hac_enable_sleep {
-			mux {
-				pins = "gpio58";
-				function = "gpio";
-			};
-
-			config {
-				pins = "gpio58";
-				drive-strength = <2>;   /* 2 mA */
-				bias-pull-down;
-				input-enable;
-			};
+	pm8008_active: pm8008_active {
+		mux{
+			pins = "gpio58";
+			function = "gpio";
 		};
-
-		hac_enable_active: hac_enable_active {
-			mux {
-				pins = "gpio58";
-				function = "gpio";
-			};
-
-			config {
-				pins = "gpio58";
-				drive-strength = <16>;  /* 16 mA */
-				bias-disable;
-				output-high;
-			};
+		config{
+			pins = "gpio58";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
 		};
-	};
+        };
 };
