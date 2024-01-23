@@ -144,7 +144,9 @@
 			"VA_AIF1 CAP", "VA_SWR_CLK",
 			"VA_AIF2 CAP", "VA_SWR_CLK",
 			"VA_AIF3 CAP", "VA_SWR_CLK";
-
+	/delete-property/ qcom,cdc-dmic01-gpios;
+	/delete-property/ qcom,cdc-dmic23-gpios;
+	/delete-property/ qcom,cdc-dmic45-gpios;
 	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
 				<&wcd939x_codec>, <&swr_haptics>,
 				<&wsa884x_0220>, <&wsa884x_0221>;
