@@ -132,6 +132,38 @@
 	status = "ok";
 };
 
+&tlmm {
+	rcv_ns_enable {
+		rcv_ns_enable_sleep: rcv_ns_enable_sleep {
+			mux {
+				pins = "gpio55";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio55";
+				drive-strength = <2>;   /* 2 mA */
+				bias-pull-down;
+				input-enable;
+			};
+		};
+
+		rcv_ns_enable_active: rcv_ns_enable_active {
+			mux {
+				pins = "gpio55";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio55";
+				drive-strength = <16>;  /* 16 mA */
+				bias-disable;
+				output-high;
+			};
+		};
+	};
+};
+
 &waipio_snd {
 	qcom,model = "diwali-qrd-snd-card";
 	qcom,sku-model = "diwali-qrd-sku1-snd-card";
@@ -184,4 +216,5 @@
 			   "aw882xx_smartpa.0-0034", "aw882xx_smartpa.0-0036";
 	qcom,wsa-max-devs = <0>;
 	fsa4480-i2c-handle = <&fsa4480>;
+	qcom,rcv_ns_enable = <&tlmm 55 0>;
 };
