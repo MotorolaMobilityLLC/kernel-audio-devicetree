@@ -73,6 +73,7 @@
 
 &fsa4480 {
 	status = "okay";
+	add-fsa4480-reset-probe = <1>;
 };
 
 &qupv3_se2_i2c {
