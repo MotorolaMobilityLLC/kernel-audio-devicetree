@@ -10,5 +10,5 @@
 	model = "Qualcomm Technologies, Inc. Lemans Single LV Guest Virtual Machine";
 	compatible = "qcom,lemans", "qcom,quinvm";
 	qcom,msm-id = <532 0x20000>;
-	qcom,board-id = <0x0 0x1000002>;
+	qcom,board-id = <0x0 0x1000002>, <0x0 0x2000002>;
 };

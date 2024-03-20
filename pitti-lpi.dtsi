@@ -1702,35 +1702,6 @@
 			bias-bus-hold;
 		};
 	};
-
-	tx_swr_data2_sleep: tx_swr_data2_sleep {
-		mux {
-			pins = "gpio18";
-			function = "func2";
-		};
-
-		config {
-			pins = "gpio18";
-			drive-strength = <10>;
-			input-enable;
-			bias-pull-down;
-		};
-	};
-
-	tx_swr_data2_active: tx_swr_data2_active {
-		mux {
-			pins = "gpio18";
-			function = "func2";
-		};
-
-		config {
-			pins = "gpio18";
-			drive-strength = <10>;
-			slew-rate = <1>;
-			bias-bus-hold;
-		};
-	};
-
 	rx_swr_clk_sleep: rx_swr_clk_sleep {
 		mux {
 			pins = "gpio3";
@@ -1979,12 +1950,12 @@
 
 	wsa_mclk_active: wsa_mclk_active {
 		mux {
-			pins = "gpio17";
-			function = "func2";
+			pins = "gpio18";
+			function = "func1";
 		};
 
 		config {
-			pins = "gpio17";
+			pins = "gpio18";
 			drive-strength = <16>;   /* 16 mA */
 			bias-disable;
 			output-high;
@@ -1993,12 +1964,12 @@
 
 	wsa_mclk_sleep: wsa_mclk_sleep {
 		mux {
-			pins = "gpio17";
-			function = "func2";
+			pins = "gpio18";
+			function = "func1";
 		};
 
 		config {
-			pins = "gpio17";
+			pins = "gpio18";
 			drive-strength = <2>;   /* 2 mA */
 			bias-pull-down;
 		};

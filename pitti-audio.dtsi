@@ -107,7 +107,7 @@
 	};
 
 	pitti_snd: sound {
-		compatible = "qcom,pitti-asoc-snd";
+		compatible = "qcom,pineapple-asoc-snd";
 		qcom,mi2s-audio-intf = <1>;
 		qcom,auxpcm-audio-intf = <1>;
 		qcom,wcn-bt = <0>;
