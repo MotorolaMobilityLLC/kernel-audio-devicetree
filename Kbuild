@@ -43,6 +43,16 @@ dtbo-y += pineapple-audio.dtbo \
                  cliffs7-audio-atp.dtbo
 endif
 
+ifeq ($(CONFIG_ARCH_VOLCANO), y)
+dtbo-y += volcano-audio.dtbo \
+		volcano-audio-cdp.dtbo \
+		volcano-audio-mtp.dtbo \
+		volcano-audio-qrd.dtbo \
+		volcano-audio-atp.dtbo \
+		volcano-audio-mtp-wcd9395.dtbo \
+		volcano-audio-cdp-wcd9395.dtbo
+endif
+
 ifeq ($(CONFIG_ARCH_PITTI), y)
 dtbo-y += pitti-audio.dtbo \
                  pitti-audio-idp.dtbo \
