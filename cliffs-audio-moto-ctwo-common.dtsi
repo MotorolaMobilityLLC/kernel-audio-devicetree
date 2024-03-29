@@ -84,7 +84,7 @@
 	 * 1 for digital crosstalk with local sensed a-xtalk enabled, and
 	 * 2 for digital crosstalk with remote sensed a-xtalk enabled.
 	 */
-	qcom,usbcss-hs-xtalk-config = <2>;
+	qcom,usbcss-hs-xtalk-config = <0>;
 	qcom,usbcss-hs-rdson-3p6v = <545>;
 	qcom,usbcss-hs-rdson-6v = <500>;
 	qcom,usbcss-hs-r1-l = <0>;
