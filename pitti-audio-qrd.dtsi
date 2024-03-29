@@ -14,3 +14,11 @@
 &pitti_snd {
 	qcom,model = "pitti-qrd-snd-card";
 };
+
+&cdc_dmic01_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+	status = "disabled";
+};
