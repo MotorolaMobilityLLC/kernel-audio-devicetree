@@ -67,6 +67,7 @@
 
 &fsa4480 {
 	status = "okay";
+	add-fsa4480-reset-probe = <1>;
 };
 
 &pm8350b_haptics {
