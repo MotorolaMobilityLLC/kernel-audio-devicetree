@@ -38,8 +38,8 @@
 };
 
 &pineapple_snd {
-	qcom,model = "volcano-mtp-wsa883x_wsa939x-snd-card";
-	qcom,sku-model = "volcano-mtp-wsa883x_wsa939x_sku1-snd-card";
+	qcom,model = "volcano-mtp-wsa883x_wcd939x-snd-card";
+	qcom,sku-model = "volcano-mtp-wsa883x_wcd939x_sku1-snd-card";
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
 	qcom,audio-routing =
