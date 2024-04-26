@@ -90,6 +90,7 @@
 		rename-flag = <1>;
 		aw-cali-mode = "none";
 		monitor-mode = "hal_monitor";
+		fade-enable = <0>;
 		status = "okay";
 	};
 	aw882xxacf_spk: aw882xx_smartpa@36 { /* SPKR */
@@ -102,6 +103,7 @@
 		rename-flag = <1>;
 		aw-cali-mode = "none";
 		monitor-mode = "hal_monitor";
+		fade-enable = <1>;
 		status = "okay";
 	};
 };
