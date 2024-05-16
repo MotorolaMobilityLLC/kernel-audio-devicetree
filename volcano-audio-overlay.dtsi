@@ -178,6 +178,7 @@
 				cdc-vdd-1p8-supply = <&L7B>;
 				qcom,cdc-vdd-1p8-voltage = <1800000 1800000>;
 				qcom,cdc-vdd-1p8-current = <20000>;
+				qcom,cdc-vdd-1p8-lpm-supported = <1>;
 				qcom,cdc-static-supplies = "cdc-vdd-1p8";
 				sound-name-prefix = "SpkrLeft";
 			};
@@ -191,6 +192,7 @@
 				cdc-vdd-1p8-supply = <&L7B>;
 				qcom,cdc-vdd-1p8-voltage = <1800000 1800000>;
 				qcom,cdc-vdd-1p8-current = <20000>;
+				qcom,cdc-vdd-1p8-lpm-supported = <1>;
 				qcom,cdc-static-supplies = "cdc-vdd-1p8";
 				sound-name-prefix = "SpkrRight";
 			};
