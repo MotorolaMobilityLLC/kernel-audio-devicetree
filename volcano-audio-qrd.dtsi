@@ -1,5 +1,29 @@
 #include "volcano-audio-overlay.dtsi"
 
+&tx_swr_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data0_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data2_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
 &pineapple_snd {
 	qcom,model = "volcano-qrd-wsa883x-snd-card";
 	qcom,sku-model = "volcano-qrd-wsa883x_sku1-snd-card";
