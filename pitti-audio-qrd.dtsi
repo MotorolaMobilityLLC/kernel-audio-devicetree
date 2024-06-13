@@ -1,5 +1,77 @@
 #include "pitti-audio-overlay.dtsi"
 
+&tx_swr_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data0_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_clk_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data0_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&tx_swr_data1_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_clk_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_data_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_data1_active {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_clk_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_data_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
+&rx_swr_data1_sleep {
+	config {
+		drive-strength = <2>;
+	};
+};
+
 &wcd9378_rst_gpio {
 	compatible = "qcom,msm-cdc-pinctrl";
 	pinctrl-names = "aud_active", "aud_sleep";
