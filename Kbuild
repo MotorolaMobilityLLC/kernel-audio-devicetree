@@ -50,7 +50,17 @@ dtbo-y += volcano-audio.dtbo \
 		volcano-audio-qrd.dtbo \
 		volcano-audio-atp.dtbo \
 		volcano-audio-mtp-wcd9395.dtbo \
-		volcano-audio-cdp-wcd9395.dtbo
+		volcano-audio-cdp-wcd9395.dtbo \
+		volcano6i-audio-idp-wcd9395-ganges.dtbo \
+		volcano6i-audio-idp-wcd9395-brahma.dtbo \
+		volcano6i-audio-mtp-wcd9395-ganges.dtbo \
+		volcano6i-audio-mtp-ganges.dtbo \
+		volcano6i-audio-mtp-wcd9395-ganges-hac2019.dtbo \
+		volcano6i-audio-mtp-wcd9395-brahma.dtbo \
+		volcano6i-audio-mtp-brahma.dtbo \
+		volcano6i-audio-mtp-wcd9395-moselle.dtbo \
+		volcano6i-audio-mtp-moselle-wingmate.dtbo \
+		volcano6i-audio-qrd-moselle.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_PITTI), y)
