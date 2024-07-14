@@ -14,7 +14,8 @@ dtbo-$(CONFIG_ARCH_DIWALI) += diwali-audio.dtbo \
                  diwali-audio-atp.dtbo \
                  diwali-audio-idp-hsp.dtbo \
                  diwali-audio-idp-usbc.dtbo
-
+#remove useless qcom device tree in moto build
+ifneq ($(CONFIG_MMI_DEVICE_DTBS),y)
 dtbo-$(CONFIG_ARCH_PARROT) += parrot-audio.dtbo \
                  parrot-audio-idp.dtbo \
                  parrot-audio-idp-wcn3990.dtbo \
@@ -27,7 +28,17 @@ dtbo-$(CONFIG_ARCH_PARROT) += parrot-audio.dtbo \
                  parrot-audio-qrd-wcn6750.dtbo \
                  parrot-audio-qrd-wcn6755.dts \
                  parrot-audio-atp.dtbo
+else
+ifeq ($(CONFIG_PAROS_DTB),y)
+dtbo-$(CONFIG_ARCH_PARROT) += parrot-audio.dtbo \
+                 parrot-audio-moto-paros-evt.dtbo
+endif
 
+ifeq ($(CONFIG_MONA_DTB),y)
+dtbo-$(CONFIG_ARCH_PARROT) += parrot-audio.dtbo \
+                 parrot-audio-moto-mona-evb.dtbo
+endif
+endif
 dtbo-$(CONFIG_ARCH_RAVELIN) += ravelin-audio.dtbo \
                  ravelin-audio-idp.dtbo \
                  ravelin-audio-idp-wsa-hac.dtbo \

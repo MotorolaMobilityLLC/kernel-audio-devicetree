@@ -1,0 +1,11 @@
+/dts-v1/;
+/plugin/;
+
+#include "parrot-audio-moto-paro-common.dtsi"
+/{
+	model = "paros";
+	compatible = "qcom,parrot-qrd", "qcom,parrot", "qcom,qrd", "moto,paros";
+	qcom,msm-id = <663 0x10000>;
+	qcom,board-id = <0x43 0xA100>;
+};
+
