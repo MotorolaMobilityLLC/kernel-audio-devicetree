@@ -13,6 +13,14 @@ dtbo-y += pineapple-audio.dtbo \
                  pineapplep-audio-hdk.dtbo
 endif
 
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
+
+dtbo-$(CONFIG_ARCH_SUN) += sun-audio.dtbo
+
+dtbo-$(CONFIG_LEAP_DTB) += sun-audio-moto-leap-evb.dtbo
+
+else
+
 ifeq ($(CONFIG_ARCH_SUN), y)
 dtbo-y += sun-audio.dtbo \
                 sun-audio-cdp.dtbo \
@@ -43,6 +51,7 @@ dtbo-y += sun-audio.dtbo \
                 tuna-audio-qrd.dtbo \
                 tuna-audio-rcm.dtbo
 endif
+endif # endof of CONFIG_MMI_DEVICE_DTBS
 
 
 ifeq ($(CONFIG_ARCH_KERA), y)
