@@ -6,7 +6,7 @@
 /dts-v1/;
 /plugin/;
 
-#include "sun-audio-mtp.dtsi"
+#include "sun-audio-moto-leap-common.dtsi"
  / {
 	model = "Qualcomm Technologies, Inc. Sun MTP";
 	compatible = "qcom,sun-mtp", "qcom,sun", "qcom,mtp";
