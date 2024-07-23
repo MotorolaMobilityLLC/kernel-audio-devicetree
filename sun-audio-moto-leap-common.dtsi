@@ -1,0 +1,116 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "sun-audio-overlay.dtsi"
+
+&wcd_usbss {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&fm_i2s1_gpios {
+	status = "disabled";
+};
+
+&swr_haptics {
+	status = "ok";
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&wsa884x_0221 {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&qupv3_se3_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	atfa98xx_rcv: tfa98xx@34 { /* SPKL */
+		compatible = "tfa,tfa98xx";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 76 0>;
+		reset-polarity = <0>; // 一般配置为 1,TFA9865  配置为 0
+		irq-gpio = <&tlmm 152 0>;
+		status = "okay";
+	};
+	atfa98xx_spk: tfa98xx@35 { /* SPKR */
+		compatible = "tfa,tfa98xx";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 77 0>;
+		reset-polarity = <0>; // 一般配置为 1,TFA9865  配置为 0
+		irq-gpio = <&tlmm 155 0>;
+		status = "okay";
+	};
+};
+
+&cdc_quat_mi2s_gpios {
+	status = "okay";
+	pinctrl-0 = <&quat_mi2s_sck_active &quat_mi2s_ws_active
+			&quat_mi2s_sd0_active &quat_mi2s_sd1_active>;
+	pinctrl-1 = <&quat_mi2s_sck_sleep &quat_mi2s_ws_sleep
+			&quat_mi2s_sd0_sleep &quat_mi2s_sd1_sleep>;
+	qcom,tlmm-pins = <166>;
+};
+
+&sun_snd {
+	qcom,model = "sun-mtp-snd-card";
+	compatible = "qcom,sun-asoc-snd-stub";
+	qcom,wcn-bt = <0>;
+    qcom,wsa-max-devs = <0>;
+	qcom,wcd-dsabled = <1>;
+	qcom,mi2s-audio-intf = <0>;
+	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC0", "MIC BIAS1",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC1", "MIC BIAS3",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC2", "MIC BIAS3",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC3", "MIC BIAS1",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC0", "VA MIC BIAS1",
+		"VA DMIC1", "VA MIC BIAS3",
+		"VA DMIC2", "VA MIC BIAS3",
+		"VA DMIC3", "VA MIC BIAS1";
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&swr_haptics>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"swr-haptics";
+};
