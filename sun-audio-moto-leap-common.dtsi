@@ -5,6 +5,10 @@
 
 #include "sun-audio-overlay.dtsi"
 
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
 &wcd_usbss {
 	status = "disabled";
 };
@@ -26,10 +30,14 @@
 };
 
 &swr_haptics {
-	status = "ok";
+	status = "disabled";
 };
 
 &wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
 	status = "disabled";
 };
 
@@ -41,27 +49,23 @@
 	status = "disabled";
 };
 
-&wcd939x_codec {
-	status = "disabled";
-};
-
 &qupv3_se3_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "okay";
-	atfa98xx_rcv: tfa98xx@34 { /* SPKL */
+	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
 		compatible = "tfa,tfa98xx";
 		reg = <0x34>;
 		reset-gpio = <&tlmm 76 0>;
-		reset-polarity = <0>; // 一般配置为 1,TFA9865  配置为 0
+		reset-polarity = <0>;
 		irq-gpio = <&tlmm 152 0>;
 		status = "okay";
 	};
-	atfa98xx_spk: tfa98xx@35 { /* SPKR */
+	tfa98xx_spk: tfa98xx@35 { /* SPKR */
 		compatible = "tfa,tfa98xx";
 		reg = <0x35>;
 		reset-gpio = <&tlmm 77 0>;
-		reset-polarity = <0>; // 一般配置为 1,TFA9865  配置为 0
+		reset-polarity = <0>;
 		irq-gpio = <&tlmm 155 0>;
 		status = "okay";
 	};
@@ -78,21 +82,21 @@
 
 &sun_snd {
 	qcom,model = "sun-mtp-snd-card";
-	compatible = "qcom,sun-asoc-snd-stub";
+	swr-haptics-unsupported;
 	qcom,wcn-bt = <0>;
-    qcom,wsa-max-devs = <0>;
-	qcom,wcd-dsabled = <1>;
-	qcom,mi2s-audio-intf = <0>;
+	qcom,wsa-max-devs = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,mi2s-audio-intf = <1>;
 	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
-		"TX DMIC0", "MIC BIAS1",
 		"TX DMIC1", "Digital Mic1",
-		"TX DMIC1", "MIC BIAS3",
 		"TX DMIC2", "Digital Mic2",
-		"TX DMIC2", "MIC BIAS3",
 		"TX DMIC3", "Digital Mic3",
-		"TX DMIC3", "MIC BIAS1",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
 		"RX_TX DEC0_INP", "TX DEC0 MUX",
 		"RX_TX DEC1_INP", "TX DEC1 MUX",
 		"RX_TX DEC2_INP", "TX DEC2 MUX",
@@ -105,12 +109,12 @@
 		"VA DMIC1", "Digital Mic1",
 		"VA DMIC2", "Digital Mic2",
 		"VA DMIC3", "Digital Mic3",
-		"VA DMIC0", "VA MIC BIAS1",
-		"VA DMIC1", "VA MIC BIAS3",
-		"VA DMIC2", "VA MIC BIAS3",
-		"VA DMIC3", "VA MIC BIAS1";
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
 	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
-			<&swr_haptics>;
+			<&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
-			"swr-haptics";
+			"tfa98xx-0034", "tfa98xx-0035";
 };
