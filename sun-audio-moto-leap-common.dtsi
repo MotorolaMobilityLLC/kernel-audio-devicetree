@@ -88,6 +88,7 @@
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
+	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
 		"TX DMIC1", "Digital Mic1",
@@ -117,4 +118,43 @@
 			<&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			"tfa98xx-0034", "tfa98xx-0035";
+};
+
+&spf_core_platform  {
+	micbias_en_gpio: micbias_en_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&cdc_micbias_en_active>;
+		pinctrl-1 = <&cdc_micbias_en_sleep>;
+		#gpio-cells = <0>;
+	};
+};
+
+&tlmm {
+	cdc_micbias_en_active: micbias_en_active {
+		mux {
+			pins = "gpio92";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio92";
+			drive-strength = <8>;
+			output-high;
+		};
+	};
+
+	cdc_micbias_en_sleep: micbias_en_sleep {
+		mux {
+			pins = "gpio92";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio92";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
 };
