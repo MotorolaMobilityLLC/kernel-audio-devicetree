@@ -81,7 +81,7 @@
 };
 
 &sun_snd {
-	qcom,model = "sun-mtp-snd-card";
+	qcom,model = "sun-qrd-snd-card";
 	swr-haptics-unsupported;
 	qcom,wcn-bt = <0>;
 	qcom,wsa-max-devs = <0>;
