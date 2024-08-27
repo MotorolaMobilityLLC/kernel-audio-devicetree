@@ -51,10 +51,6 @@
 	qcom,boost_voltage_11v;
 };
 
-&adsp_sleepmon {
-	qcom,enable_adsp_panic_lpi;
-};
-
 &pineapple_snd {
 	qcom,model = "cliffs-mtp-snd-card";
 	qcom,mi2s-audio-intf = <0>;
