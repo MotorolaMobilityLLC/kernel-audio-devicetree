@@ -3,6 +3,7 @@
 
 &pineapple_snd {
 	/delete-property/ qcom,pri-mi2s-gpios;
+	qcom,model = "volcano6-cdp-wsa883x_wcd939x-snd-card";
 	qcom,wcn-bt = <0>;
 	qcom,wcn-btfm-proxy = <1>;
 };

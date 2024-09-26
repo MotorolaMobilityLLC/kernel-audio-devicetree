@@ -2,6 +2,7 @@
 #include "volcano-audio-bt-swr.dtsi"
 
 &pineapple_snd {
+	qcom,model = "volcano6i-mtp-wsa883x-snd-card";
 	qcom,msm-mbhc-usbc-audio-supported = <1>;
 	qcom,msm-mbhc-hphl-swh = <0>;
 	qcom,msm-mbhc-gnd-swh = <0>;
