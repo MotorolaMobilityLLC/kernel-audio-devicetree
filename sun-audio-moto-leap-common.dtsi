@@ -61,6 +61,9 @@
 	status = "disabled";
 };
 
+&wsa2_macro {
+    /delete-property/ #cooling-cells;
+};
 
 &wsa884x_2_0220 {
 	status = "disabled";
