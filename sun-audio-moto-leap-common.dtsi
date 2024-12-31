@@ -83,6 +83,8 @@
 		reset-gpio = <&tlmm 76 0>;
 		reset-polarity = <0>;
 		irq-gpio = <&tlmm 152 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_rcv_int_default>;
 		status = "okay";
 	};
 	tfa98xx_spk: tfa98xx@35 { /* SPKR */
@@ -98,9 +100,9 @@
 &cdc_quat_mi2s_gpios {
 	status = "okay";
 	pinctrl-0 = <&quat_mi2s_sck_active &quat_mi2s_ws_active
-			&quat_mi2s_sd0_active &quat_mi2s_sd1_active>;
+			&quat_mi2s_sd0_active &quat_mi2s_sd1_active &tfa_spk_int_default>;
 	pinctrl-1 = <&quat_mi2s_sck_sleep &quat_mi2s_ws_sleep
-			&quat_mi2s_sd0_sleep &quat_mi2s_sd1_sleep>;
+			&quat_mi2s_sd0_sleep &quat_mi2s_sd1_sleep &tfa_spk_int_default>;
 	qcom,tlmm-pins = <166>;
 };
 
@@ -181,4 +183,29 @@
 			output-low;
 		};
 	};
+
+    tfa_rcv_int_default: tfa_rcv_int_default {
+        mux {
+            pins = "gpio152";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio152";
+            bias-pull-up;
+            input-enable;
+        };
+    };
+    tfa_spk_int_default: tfa_spk_int_default {
+        mux {
+            pins = "gpio155";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio155";
+            bias-pull-up;
+            input-enable;
+        };
+    };
 };
