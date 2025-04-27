@@ -91,7 +91,7 @@
 };
 
 &fsa4480 {
-	status = "disabled";
+	status = "okay";
 };
 
 &waipio_snd {
@@ -99,9 +99,10 @@
 	qcom,sku-model = "parrot-qrd-sku1-snd-card";
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
-	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
 	qcom,msm-mbhc-hphl-swh = <0>;
 	qcom,msm-mbhc-gnd-swh = <0>;
+	fsa4480-i2c-handle = <&fsa4480>;
 
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
@@ -148,4 +149,39 @@
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			   "wcd937x_codec";
 	qcom,wsa-max-devs = <0>;
+};
+&qupv3_se2_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	spk_amp1: fs18xx@35 {
+		compatible = "foursemi,fs1815";
+		reg = <0x35>;
+		spkr-id = <1>;
+		fwm-name = "frsm-spk1.bin";
+		status = "okay";
+	};
+
+	spk_amp2: fs18xx@34 {
+		compatible = "foursemi,fs1815";
+		reg = <0x34>;
+		spkr-id = <2>;
+		fwm-name = "frsm-spk2.bin";
+		status = "okay";
+	};
+};
+
+&soc {
+    frsm_amp: frsm_amp  {
+        compatible = "foursemi,frsm-amp";
+        frsm,amp-ndev = <2>;
+        frsm,class-enable;
+        status = "okay";
+    };
+
+    frsm_amp_mngr: frsm_amp_mngr {
+        compatible = "audio,spkr-amp-mngr";
+        audio,amp-ndev = <2>;
+        status = "okay";
+    };
 };
