@@ -91,7 +91,7 @@
 };
 
 &fsa4480 {
-	status = "okay";
+	status = "disabled";
 };
 
 &waipio_snd {
@@ -99,10 +99,9 @@
 	qcom,sku-model = "parrot-qrd-sku1-snd-card";
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
-	qcom,msm-mbhc-usbc-audio-supported = <1>;
-	qcom,msm-mbhc-hphl-swh = <0>;
-	qcom,msm-mbhc-gnd-swh = <0>;
-	fsa4480-i2c-handle = <&fsa4480>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <1>;
+	qcom,msm-mbhc-gnd-swh = <1>;
 
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
