@@ -19,6 +19,10 @@ dtbo-$(CONFIG_ARCH_SUN) += sun-audio.dtbo
 
 dtbo-$(CONFIG_LEAP_DTB) += sun-audio-moto-leap-evb.dtbo
 
+dtbo-$(CONFIG_ARCH_KERA) += kera-audio.dtbo
+
+dtbo-$(CONFIG_ROADSTR_DTB) += kera-audio-moto-roadstr-evb.dtbo
+
 else
 
 ifeq ($(CONFIG_ARCH_SUN), y)
@@ -51,7 +55,6 @@ dtbo-y += sun-audio.dtbo \
                 tuna-audio-qrd.dtbo \
                 tuna-audio-rcm.dtbo
 endif
-endif # endof of CONFIG_MMI_DEVICE_DTBS
 
 
 ifeq ($(CONFIG_ARCH_KERA), y)
@@ -66,6 +69,7 @@ dtbo-y += kera-audio.dtbo \
                 kera-audio-rcm-orne.dtbo
 
 endif
+endif # endof of CONFIG_MMI_DEVICE_DTBS
 
  always-y    := $(dtb-y) $(dtbo-y)
  subdir-y    := $(dts-dirs)
