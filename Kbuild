@@ -34,6 +34,14 @@ dtbo-y += sun-audio.dtbo \
                 sun-audio-hamilton-mtp-3.5mm.dtbo
 endif
 
+ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
+
+dtbo-$(CONFIG_ARCH_CANOE) += canoe-audio.dtbo
+
+dtbo-$(CONFIG_VANTG_DTB) += canoe-audio-moto-vantg-evb.dtbo
+
+else
+
 ifeq ($(CONFIG_ARCH_CANOE), y)
 dtbo-y += canoe-audio.dtbo \
 		canoe-audio-rumi.dtbo \
@@ -65,6 +73,8 @@ dtbo-y += canoe-audio.dtbo \
                 alor-audio-rcm.dtbo \
                 alor-audio-rumi.dtbo
 endif
+
+endif # endof of CONFIG_MMI_DEVICE_DTBS
 
  always-y    := $(dtb-y) $(dtbo-y)
  subdir-y    := $(dts-dirs)
