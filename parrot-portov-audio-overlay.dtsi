@@ -158,6 +158,8 @@
 		reg = <0x35>;
 		spkr-id = <1>;
 		fwm-name = "frsm-spk1.bin";
+		mntr-enable;
+		mntr-period = <2000>;
 		status = "okay";
 	};
 
@@ -166,6 +168,8 @@
 		reg = <0x34>;
 		spkr-id = <2>;
 		fwm-name = "frsm-spk2.bin";
+		mntr-enable;
+		mntr-period = <2000>;
 		status = "okay";
 	};
 };
