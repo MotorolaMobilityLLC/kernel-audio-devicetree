@@ -134,6 +134,7 @@
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+	qcom,cdc-dmic67-gpios = <&cdc_dmic67_gpios>;
 	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
