@@ -8,10 +8,10 @@
 
 #include "canoe-audio-moto-vantg-common.dtsi"
  / {
-	model = "Qualcomm Technologies, Inc. Canoe QRD";
+	model = "vantg";
 	compatible = "qcom,canoe-qrd", "qcom,canoe", "qcom,qrd";
 	qcom,msm-id = <660 0x10000>, <660 0x20000>, <661 0x10000>, <661 0x20000>,
 		      <0x1000294 0x10000>, <0x1000294 0x20000>,
 		      <0x1000295 0x10000>, <0x1000295 0x20000>;
-	qcom,board-id = <0x2000B 0>;
+	qcom,board-id = <0x41 0x9100>;
 };
