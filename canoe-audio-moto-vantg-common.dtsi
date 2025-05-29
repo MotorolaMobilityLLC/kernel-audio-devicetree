@@ -69,7 +69,7 @@
 &qupv3_se3_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	status = "okay";
+	status = "disabled";
 	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
 		compatible = "tfa,tfa98xx";
 		reg = <0x34>;
