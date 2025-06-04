@@ -24,6 +24,8 @@ dtbo-$(CONFIG_ARCH_KERA) += kera-audio.dtbo
 dtbo-$(CONFIG_ROADSTR_DTB) += kera-audio-moto-roadstr-evb.dtbo
 dtbo-$(CONFIG_ROADSTR_DTB) += kera-audio-moto-roadstr-evt.dtbo
 
+dtbo-$(CONFIG_QOGIR_DTB) += kera-audio-moto-qogir-evb.dtbo
+
 else
 
 ifeq ($(CONFIG_ARCH_SUN), y)
