@@ -185,6 +185,7 @@
     frsm_amp_mngr: frsm_amp_mngr {
         compatible = "audio,spkr-amp-mngr";
         audio,amp-ndev = <2>;
+        audio,register-dapm = <0>;
         status = "okay";
     };
 };
