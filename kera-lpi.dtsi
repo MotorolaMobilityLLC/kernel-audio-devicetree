@@ -88,7 +88,7 @@
 			config {
 				pins = "gpio2";
 				drive-strength = <8>;   /* 8 mA */
-				bias-disable;           /* NO PULL */
+				bias-pull-down;           /* PULL DOWN*/
 				output-high;
 			};
 		};
