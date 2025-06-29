@@ -70,40 +70,30 @@
         status = "disabled";
 };
 
-&lpass_bt_swr {
-        status = "disabled";
-};
-
 &qupv3_se4_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
-	status = "ok";
-        aw882xxacf_rcv: aw882xx_smartpa@34 { /* SPKL */
-                  compatible = "awinic,aw882xx_smartpa";
-                  reg = <0x34>;
-                  irq-gpio = <&tlmm 130 0>;
-                  reset-gpio = <&tlmm 148 0>;
-                  sync-load = <1>;
-                  sound-channel = <0>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
-                  aw-re-min = <4000>;
-                  aw-re-max= <30000>;
-                  rename-flag = <1>;
-                  aw-cali-mode = "none";
-                  status = "okay";
-         };
-         aw882xxacf_spk: aw882xx_smartpa@35 { /* SPKR */
-                  compatible = "awinic,aw882xx_smartpa";
-                  reg = <0x35>;
-                  irq-gpio = <&tlmm 127 0>;
-                  reset-gpio = <&tlmm 156 0>;
-                  sync-load = <1>;
-                  sound-channel = <1>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
-                  aw-re-min = <4000>;
-                  aw-re-max= <30000>;
-                  rename-flag = <1>;
-                  aw-cali-mode = "none";
-                  status = "okay";
-         };
+	status = "okay";
+	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
+		compatible = "tfa,tfa98xx";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 148 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 130 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_rcv_int_default>;
+		status = "okay";
+	};
+	tfa98xx_spk: tfa98xx@35 { /* SPKR */
+		compatible = "tfa,tfa98xx";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 156 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 127 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_spk_int_default>;
+		status = "okay";
+	};
 };
 
 &cdc_quat_mi2s_gpios {
@@ -127,33 +117,6 @@
         };
 };
 
-&tlmm{
-	earpiece_dsense_high: earpiece_dsense_high {
-		mux {
-			pins = "gpio121";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio121";
-			drive-strength = <2>; /* 2 MA */
-			output-high;
-		};
-	};
-	earpiece_dsense_low: earpiece_dsense_low {
-		mux {
-			pins = "gpio121";
-			function = "gpio";
-		};
-
-		config {
-			pins = "gpio121";
-			drive-strength = <2>; /* 2 MA */
-			output-low;
-		};
-	};
-};
-
 &kera_snd {
 	qcom,model = "kera-qrd-snd-card";
 	qcom,wcn-bt = <1>;
@@ -165,10 +128,9 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pm_eldo_dmic_gpio_default>;
 	eldo_dmic_en_gpio = <&pmxr2230_gpios 8 0>;
-	earpiece-dsense-enable = <&tlmm 121 0>;
 	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
 	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
-	custom-mi2s-audio-intf = <1>;
+	qcom,cdc-dmic45-gpios = <&cdc_dmic45_gpios>;
 	swr-haptics-unsupported;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
@@ -196,8 +158,34 @@
 		"VA DMIC6", "Digital Mic6",
 		"VA DMIC7", "Digital Mic7";
 	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
-			<&aw882xxacf_rcv>, <&aw882xxacf_spk>;
+			<&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
-			"aw882xx_smartpa_0", "aw882xx_smartpa_1";
+			"tfa98xx-0034", "tfa98xx-0035";
 };
 
+&tlmm {
+    tfa_rcv_int_default: tfa_rcv_int_default {
+        mux {
+            pins = "gpio130";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio130";
+            bias-pull-up;
+            input-enable;
+        };
+    };
+    tfa_spk_int_default: tfa_spk_int_default {
+        mux {
+            pins = "gpio127";
+            function = "gpio";
+        };
+
+        config {
+            pins = "gpio127";
+            bias-pull-up;
+            input-enable;
+        };
+    };
+};
