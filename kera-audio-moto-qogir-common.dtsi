@@ -70,6 +70,14 @@
         status = "disabled";
 };
 
+&wcd_rst_gpio {
+		status = "disabled";
+};
+
+&cdc_dmic45_gpios {
+		status = "okay";
+};
+
 &qupv3_se4_i2c {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -105,6 +113,15 @@
         qcom,tlmm-pins = <138>;
 };
 
+&cdc_pri_mi2s_gpios {
+	status = "okay";
+	pinctrl-0 = <&i2s0_sck_active &i2s0_ws_active
+			&i2s0_sd0_active>;
+	pinctrl-1 = <&i2s0_sck_sleep &i2s0_ws_sleep
+			&i2s0_sd0_sleep>;
+	#gpio-cells = <0>;
+};
+
 &pmxr2230_gpios {
 	pm_eldo_dmic_gpio {
 		pm_eldo_dmic_gpio_default: pm_eldo_dmic_gpio_default {
@@ -124,6 +141,7 @@
 	qcom,wsa-max-devs = <0>;
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
+	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
 	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pm_eldo_dmic_gpio_default>;

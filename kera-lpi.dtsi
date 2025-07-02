@@ -2008,7 +2008,7 @@
 		};
 	};
 
-	cdc_dmic45_clk_active: cdc_dmic45_clk_active {
+	cdc_dmic45_clk_active: dmic45_clk_active {
 		mux {
 			pins = "gpio12";
 			function = "func1";
@@ -2017,11 +2017,11 @@
 		config {
 			pins = "gpio12";
 			drive-strength = <8>;
-			input-enable;
+			output-high;
 		};
 	};
 
-	cdc_dmic45_clk_sleep: lpi_dmic45_clk_sleep {
+	cdc_dmic45_clk_sleep: dmic45_clk_sleep {
 		mux {
 			pins = "gpio12";
 			function = "func1";
@@ -2030,12 +2030,12 @@
 		config {
 			pins = "gpio12";
 			drive-strength = <2>;
-			pull-down;
-			input-enable;
+			bias-disable;
+			output-low;
 		};
 	};
 
-	cdc_dmic45_data_active: cdc_dmic45_data_active {
+	cdc_dmic45_data_active: dmic45_data_active {
 		mux {
 			pins = "gpio13";
 			function = "func1";
@@ -2048,7 +2048,7 @@
 		};
 	};
 
-	cdc_dmic45_data_sleep: cdc_dmic45_data_sleep {
+	cdc_dmic45_data_sleep: dmic45_data_sleep {
 		mux {
 			pins = "gpio13";
 			function = "func1";
