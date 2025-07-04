@@ -38,6 +38,8 @@ ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 
 dtbo-$(CONFIG_ARCH_CANOE) += canoe-audio.dtbo
 
+dtbo-$(CONFIG_BLANC_DTB) += canoe-audio-moto-blanc-evb.dtbo
+
 dtbo-$(CONFIG_VANTG_DTB) += canoe-audio-moto-vantg-evb.dtbo \
                             canoe-audio-moto-vantg-evt1.dtbo
 else

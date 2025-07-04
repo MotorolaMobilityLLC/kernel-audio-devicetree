@@ -1,0 +1,236 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "canoe-audio-overlay.dtsi"
+#include "canoe-audio-lpass-reg.dtsi"
+
+&wcd_usbss {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&wsa884x_0221 {
+	status = "disabled";
+};
+
+&lpass_cdc {
+	qcom,num-macros = <4>;
+};
+
+&swr0 {
+	status = "disabled";
+};
+
+&swr1 {
+	status = "disabled";
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&va_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	/delete-property/ #cooling-cells;
+};
+
+&wsa884x_2_0220 {
+	status = "disabled";
+};
+
+&wsa884x_2_0221 {
+	status = "disabled";
+};
+
+&qupv3_se23_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
+		compatible = "tfa,tfa98xx";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 76 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 84 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_rcv_int_default>;
+		status = "okay";
+	};
+	tfa98xx_spk: tfa98xx@35 { /* SPKR */
+		compatible = "tfa,tfa98xx";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 77 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 81 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_spk_int_default>;
+		status = "okay";
+	};
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+};
+
+&wcd939x_rst_gpio {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&cdc_pri_mi2s_gpios {
+	status = "ok";
+};
+
+/* set tfa98xx i2s rx data pin to pull down to avoid random pop noise */
+&i2s0_sd1_active {
+	config {
+		bias-pull-down; /* PULL DOWN*/
+	};
+};
+
+&canoe_snd {
+	qcom,model = "canoe-qrd-snd-card";
+	qcom,wcn-bt = <1>;
+	qcom,wsa-max-devs = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+	qcom,cdc-dmic67-gpios = <&cdc_dmic67_gpios>;
+	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"HAP_IN", "WSA2_HAPT OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			   <&swr_haptics>,
+			   <&tfa98xx_rcv>, <&tfa98xx_spk>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			   "swr-haptics",
+			   "tfa98xx-0034", "tfa98xx-0035";
+};
+
+&spf_core_platform  {
+	micbias_en_gpio: micbias_en_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&cdc_micbias_en_active>;
+		pinctrl-1 = <&cdc_micbias_en_sleep>;
+		#gpio-cells = <0>;
+	};
+};
+
+&tlmm {
+	cdc_micbias_en_active: micbias_en_active {
+		mux {
+			pins = "gpio9";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio9";
+			drive-strength = <8>;
+			output-high;
+		};
+	};
+
+	cdc_micbias_en_sleep: micbias_en_sleep {
+		mux {
+			pins = "gpio9";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio9";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+
+	tfa_rcv_int_default: tfa_rcv_int_default {
+		mux {
+			pins = "gpio84";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio84";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+
+	tfa_spk_int_default: tfa_spk_int_default {
+		mux {
+			pins = "gpio81";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio81";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+};
