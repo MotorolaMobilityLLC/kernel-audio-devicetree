@@ -82,6 +82,8 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
 	status = "okay";
+	haptic_hv_ext: haptic_hv@5A{
+	};
 	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
 		compatible = "tfa,tfa98xx";
 		reg = <0x34>;
@@ -141,6 +143,7 @@
 	qcom,wsa-max-devs = <0>;
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
+	haptic-i2s-supported;
 	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
 	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
 	pinctrl-names = "default";
@@ -176,8 +179,10 @@
 		"VA DMIC6", "Digital Mic6",
 		"VA DMIC7", "Digital Mic7";
 	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&haptic_hv_ext>,
 			<&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"haptic_hv",
 			"tfa98xx-0034", "tfa98xx-0035";
 };
 
