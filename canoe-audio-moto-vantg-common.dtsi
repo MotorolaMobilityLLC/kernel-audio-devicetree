@@ -3,7 +3,12 @@
  * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
-#include "canoe-audio-overlay.dtsi"
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "canoe-lpi.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
 #include "canoe-audio-lpass-reg.dtsi"
 
 &wcd_usbss {
@@ -96,6 +101,12 @@
 	status = "disabled";
 };
 
+&swr3 {
+	swr_haptics: swr_haptics@f0170220 {
+		status = "okay";
+	};
+};
+
 &rx_macro {
 	qcom,is-used-swr-gpio = <0>;
 };
@@ -129,13 +140,22 @@
 
 &canoe_snd {
 	qcom,model = "canoe-qrd-snd-card";
+    qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+    qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
 	qcom,wcn-bt = <1>;
+    qcom,ext-disp-audio-rx = <1>;
+    qcom,tdm-max-slots = <8>;
+    qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+    qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+    qcom,audio-core-list = <0>, <1>;
+
 	qcom,wsa-max-devs = <0>;
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
 	qcom,cdc-dmic67-gpios = <&cdc_dmic67_gpios>;
 	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+    qcom,dedicated-wsa2;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
 		"TX DMIC1", "Digital Mic1",
@@ -168,6 +188,8 @@
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			   "swr-haptics",
 			   "tfa98xx-0034", "tfa98xx-0035";
+    qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+                             <&lpass_cdc>, <&lpass_bt_swr>;
 };
 
 &spf_core_platform  {
