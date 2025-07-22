@@ -85,7 +85,7 @@
 		reg = <0x35>;
 		reset-gpio = <&tlmm 77 0>;
 		reset-polarity = <0>;
-		irq-gpio = <&tlmm 81 0>;
+		irq-gpio = <&tlmm 78 0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&tfa_spk_int_default>;
 		status = "okay";
@@ -223,12 +223,12 @@
 
 	tfa_spk_int_default: tfa_spk_int_default {
 		mux {
-			pins = "gpio81";
+			pins = "gpio78";
 			function = "gpio";
 		};
 
 		config {
-			pins = "gpio81";
+			pins = "gpio78";
 				bias-pull-up;
 				input-enable;
 		};
