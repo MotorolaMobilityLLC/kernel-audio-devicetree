@@ -15,8 +15,3 @@
 		      <0x1000295 0x10000>, <0x1000295 0x20000>;
 	qcom,board-id = <0x41 0x9100>;
 };
-
-/* the i2c pins is used by camera pin on evb board, can't be enabled */
-&qupv3_se23_i2c {
-    status = "disabled";
-};
