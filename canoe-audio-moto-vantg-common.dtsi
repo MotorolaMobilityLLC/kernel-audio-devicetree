@@ -153,6 +153,8 @@
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
+	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
 	qcom,cdc-dmic67-gpios = <&cdc_dmic67_gpios>;
 	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
     qcom,dedicated-wsa2;
