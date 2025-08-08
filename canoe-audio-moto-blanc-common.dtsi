@@ -3,14 +3,13 @@
  * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
-#include "canoe-lpi.dtsi"
 #include "lpass-audio-cdc-1.0.dtsi"
+#include "canoe-lpi.dtsi"
 #include "lpass-audio-bt-swr.dtsi"
 #include "lpass-cdc-gpio.dtsi"
-#include "canoe-audio-lpass-reg.dtsi"
-
 #include "wsa884x.dtsi"
 #include "wcd939x.dtsi"
+#include "canoe-audio-lpass-reg.dtsi"
 
 &wcd_usbss {
 	status = "disabled";
@@ -102,6 +101,12 @@
 	status = "disabled";
 };
 
+&swr3 {
+	swr_haptics: swr_haptics@f0170220 {
+		status = "okay";
+	};
+};
+
 &rx_macro {
 	qcom,is-used-swr-gpio = <0>;
 };
@@ -112,12 +117,6 @@
 
 &wcd939x_rst_gpio {
 	status = "disabled";
-};
-
-&swr3 {
-       swr_haptics: swr_haptics@f0170220 {
-               status = "okay";
-       };
 };
 
 &wcd939x_tx_slave {
@@ -154,6 +153,8 @@
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
+	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
 	qcom,cdc-dmic67-gpios = <&cdc_dmic67_gpios>;
 	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
     qcom,dedicated-wsa2;
@@ -189,6 +190,8 @@
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			   "swr-haptics",
 			   "tfa98xx-0034", "tfa98xx-0035";
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+				  <&lpass_cdc>, <&lpass_bt_swr>;
 };
 
 &spf_core_platform  {
