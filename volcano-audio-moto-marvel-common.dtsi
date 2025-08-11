@@ -1,3 +1,179 @@
-/* This is original from volcano-audio-qrd.dts */
+#include "volcano-audio-overlay.dtsi"
 
-#include "volcano-audio-qrd.dtsi"
+&swr0 {
+	qcom,swr-num-dev = <0>;
+	wsa883x_0221: wsa883x@02170221 {
+		status = "disabled";
+	};
+
+	wsa883x_0222: wsa883x@02170222 {
+		status = "disabled";
+	};
+};
+
+&wcd9378_codec {
+	status = "disabled";
+};
+
+&wcd9378_rx_slave {
+	status = "disabled";
+};
+
+&wcd9378_tx_slave {
+	status = "disabled";
+};
+
+&swr0 {
+	status = "disabled";
+};
+
+&swr1 {
+	status = "disabled";
+};
+
+&swr2 {
+	status = "disabled";
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&va_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&fm_i2s0_gpios {
+	status = "disabled";
+};
+
+&qupv3_se8_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "ok";
+        aw882xxacf_rcv: aw882xx_smartpa@34 { /* SPKL */
+                  compatible = "awinic,aw882xx_smartpa";
+                  reg = <0x34>;
+                  irq-gpio = <&tlmm 144 0>;
+                  reset-gpio = <&tlmm 145 0>;
+                  sync-load = <1>;
+                  sound-channel = <0>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+                  aw-re-min = <4000>;
+                  aw-re-max= <30000>;
+                  rename-flag = <1>;
+                  aw-cali-mode = "none";
+                  status = "okay";
+         };
+         aw882xxacf_spk: aw882xx_smartpa@35 { /* SPKR */
+                  compatible = "awinic,aw882xx_smartpa";
+                  reg = <0x35>;
+                  irq-gpio = <&tlmm 143 0>;
+                  reset-gpio = <&tlmm 142 0>;
+                  sync-load = <1>;
+                  sound-channel = <1>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+                  aw-re-min = <4000>;
+                  aw-re-max= <30000>;
+                  rename-flag = <1>;
+                  aw-cali-mode = "none";
+                  status = "okay";
+         };
+};
+
+&tlmm {
+	cdc_micbias_en_active: micbias_en_active {
+		mux {
+			pins = "gpio119";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <8>;
+			output-high;
+		};
+	};
+
+	cdc_micbias_en_sleep: micbias_en_sleep {
+		mux {
+			pins = "gpio119";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+};
+
+&spf_core_platform {
+ 	cdc_quat_mi2s_gpios: quat_mi2s_pinctrl {
+ 		status = "okay";
+ 		compatible = "qcom,msm-cdc-pinctrl";
+ 		pinctrl-names = "aud_active", "aud_sleep";
+ 		pinctrl-0 = <&quat_mi2s_sck_active &quat_mi2s_ws_active
+                                 &quat_mi2s_sd0_active &quat_mi2s_sd1_active>;
+                pinctrl-1 = <&quat_mi2s_sck_sleep &quat_mi2s_ws_sleep
+                                 &quat_mi2s_sd0_sleep &quat_mi2s_sd1_sleep>;
+ 		qcom,lpi-gpios;
+ 		 qcom,tlmm-pins = <133>;
+ 		#gpio-cells = <0>;
+ 	};
+ 	
+ 	micbias_en_gpio: micbias_en_pinctrl {
+ 		compatible = "qcom,msm-cdc-pinctrl";
+ 		pinctrl-names = "aud_active", "aud_sleep";
+ 		pinctrl-0 = <&cdc_micbias_en_active>;
+ 		pinctrl-1 = <&cdc_micbias_en_sleep>;
+ 		#gpio-cells = <0>;
+ 	};
+};
+
+&pineapple_snd {
+	nvmem-cells = <&adsp_variant>;
+	nvmem-cell-names = "adsp_variant";
+	qcom,wcn-bt = <0>;
+	qcom,wcn-btfm = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			<&aw882xxacf_rcv>, <&aw882xxacf_spk>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			"aw882xx_smartpa_0", "aw882xx_smartpa_1";
+	qcom,wsa-max-devs = <0>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+	qcom,ext-disp-audio-rx = <0>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,quat-mi2s-gpios = <&cdc_quat_mi2s_gpios>;
+	custom-mi2s-audio-intf = <1>;
+	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+};
+
