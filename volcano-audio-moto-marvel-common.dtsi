@@ -11,9 +11,17 @@
 	};
 };
 
+&wcd939x_codec {
+	status = "disabled";
+	/delete-property/ qcom,wcd-rst-gpio-node;
+};
+
 &wcd9378_codec {
 	status = "disabled";
+	/delete-property/ qcom,wcd-rst-gpio-node;
 };
+
+/delete-node/ &wcd_rst_gpio;
 
 &wcd9378_rx_slave {
 	status = "disabled";
