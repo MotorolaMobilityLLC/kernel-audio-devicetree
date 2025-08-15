@@ -18,6 +18,7 @@ ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
 dtbo-$(CONFIG_ARCH_SUN) += sun-audio.dtbo
 
 dtbo-$(CONFIG_LEAP_DTB) += sun-audio-moto-leap-evb.dtbo
+dtbo-$(CONFIG_LHOTSE_DTB) += sun-audio-moto-lhotse-evt.dtbo
 
 else
 
