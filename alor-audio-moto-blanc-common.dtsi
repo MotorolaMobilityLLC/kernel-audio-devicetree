@@ -1,0 +1,306 @@
+//
+/* Copyright (c) 2025 Motorola Mobility LLC. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear.
+ */
+
+#include "alor-lpi.dtsi"
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "alor-audio-lpass-reg.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
+
+&wcd_usbss {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&wsa884x_0221 {
+	status = "disabled";
+};
+
+&lpass_cdc {
+	qcom,num-macros = <4>;
+};
+
+&swr0 {
+	status = "disabled";
+};
+
+&swr1 {
+	status = "disabled";
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&va_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	/delete-property/ #cooling-cells;
+};
+
+&wsa884x_2_0220 {
+	status = "disabled";
+};
+
+&wsa884x_2_0221 {
+	status = "disabled";
+};
+
+&qupv3_se11_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	tfa98xx_rcv: tfa98xx@34 { /* SPKL */
+		compatible = "tfa,tfa98xx";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 182 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 22 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_rcv_int_default>;
+		status = "okay";
+	};
+	tfa98xx_spk: tfa98xx@35 { /* SPKR */
+		compatible = "tfa,tfa98xx";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 183 0>;
+		reset-polarity = <0>;
+		irq-gpio = <&tlmm 202 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&tfa_spk_int_default>;
+		status = "okay";
+	};
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&swr3 {
+	swr_haptics: swr_haptics@f0170220 {
+		status = "okay";
+	};
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+};
+
+&wcd939x_rst_gpio {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&cdc_sen_mi2s_gpios {
+	status = "ok";
+};
+
+/* set tfa98xx i2s rx data pin to pull down to avoid random pop noise */
+&i2s0_sd1_active {
+	config {
+		bias-pull-down; /* PULL DOWN*/
+	};
+};
+
+&alor_snd {
+    qcom,model = "alor-qrd-snd-card";
+    qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+    qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+    qcom,wcn-bt = <1>;
+    qcom,ext-disp-audio-rx = <1>;
+    qcom,wcn-bt-ext = <0>;
+    qcom,tdm-max-slots = <8>;
+    qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+    qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+    qcom,audio-core-list = <0>, <1>;
+    	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+			   <&swr_haptics>,
+			   <&tfa98xx_rcv>, <&tfa98xx_spk>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+			   "swr-haptics",
+			   "tfa98xx-0034", "tfa98xx-0035";
+
+	qcom,wsa-max-devs = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,mi2s-audio-intf = <1>;
+	custom-mi2s-audio-intf = <1>;
+	qcom,sen-mi2s-gpios = <&cdc_sen_mi2s_gpios>;
+	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
+	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
+	qcom,cdc-dmic45-gpios = <&cdc_dmic45_gpios>;
+	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"HAP_IN", "WSA2_HAPT OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+				  <&lpass_cdc>, <&lpass_bt_swr>;
+		/*
+		 * ====================
+		 * UPD backend - WSA
+		 * ====================
+		 *
+		 * Mute/Unmute the interpolator
+		 * ------------------------------
+		 * Register: LPASS_WSA_CDC_RX0_RX_PATH_MIX_CTL - 0x6B00418
+		 *
+		 * Send control commands to the peripheral from the soundwire controller
+		 * -----------------------------------------------------------------------
+		 * Register: LPASS_WSA_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x6B14020
+		 *
+		 * Enable/Disable ear piece
+		 * --------------------------
+		 * Register: DIG_CTRL0_PA_FSM_EN - 0x3430
+		 *
+		 *
+		 *	qcom,upd_backends_used = "wsa";
+		 *	qcom,upd_lpass_reg_addr = <0x6B00418 0x6B14020>;
+		 *	qcom,upd_ear_pa_reg_addr = <0x3430>;
+		/*
+		* ====================
+		* UPD backend - WCD
+		* ====================
+		*
+		* Mute/Unmute the interpolator
+		* ------------------------------
+		* Register: LPASS_WCD_CDC_RX0_RX_PATH_MIX_CTL - 0x6AC0418
+		*
+		* Send control commands to the wcd from the soundwire controller
+		* ----------------------------------------------------------------
+		* Register: LPASS_WCD_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x7634020
+		*
+		* Enable/Disable ear piece
+		* --------------------------
+		* Register: DIG_CTRL0_PA_FSM_EN - 0x300A
+		*
+		*/
+		/*
+		* qcom,upd_backends_used = "wcd";
+		* qcom,upd_lpass_reg_addr = <0x6AC0418 0x7634020>;
+		* qcom,upd_ear_pa_reg_addr = <0x300A>;
+		*/
+};
+
+&spf_core_platform  {
+	micbias_en_gpio: micbias_en_pinctrl {
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&cdc_micbias_en_active>;
+		pinctrl-1 = <&cdc_micbias_en_sleep>;
+		#gpio-cells = <0>;
+	};
+};
+
+&tlmm {
+	cdc_micbias_en_active: micbias_en_active {
+		mux {
+			pins = "gpio96";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio96";
+			drive-strength = <8>;
+			output-high;
+		};
+	};
+
+	cdc_micbias_en_sleep: micbias_en_sleep {
+		mux {
+			pins = "gpio96";
+			function = "func1";
+		};
+
+		config {
+			pins = "gpio96";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+
+	tfa_rcv_int_default: tfa_rcv_int_default {
+		mux {
+			pins = "gpio22";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio22";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+
+	tfa_spk_int_default: tfa_spk_int_default {
+		mux {
+			pins = "gpio202";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio202";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+};
