@@ -1,5 +1,5 @@
 //
-/* Copyright (c) 2025 Motorola Mobility LLC. All rights reserved.
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear.
  */
 
@@ -36,15 +36,25 @@
 };
 
 &lpass_cdc {
-	qcom,num-macros = <4>;
+	qcom,num-macros = <3>;
 };
 
 &swr0 {
 	status = "disabled";
 };
 
-&swr1 {
+&swr2 {
 	status = "disabled";
+};
+
+&swr1 {
+	status = "okay";
+	qcom,swr-num-dev = <1>;
+};
+
+&rx_swr_haptics {
+	status = "okay";
+	swr-slave-supply = <&hap_swr_slave_reg>;
 };
 
 &rx_macro {
@@ -101,18 +111,9 @@
 	status = "disabled";
 };
 
-&swr3 {
-	swr_haptics: swr_haptics@f0170220 {
-		status = "okay";
-	};
-};
 
-&rx_macro {
-	qcom,is-used-swr-gpio = <0>;
-};
-
-&rx_swr_gpios {
-	status = "disabled";
+&wsa_swr_gpios {
+    status = "disabled";
 };
 
 &wcd939x_rst_gpio {
@@ -140,26 +141,24 @@
 
 &alor_snd {
     qcom,model = "alor-qrd-snd-card";
-    qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
-    qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
-    qcom,wcn-bt = <1>;
-    qcom,ext-disp-audio-rx = <1>;
-    qcom,wcn-bt-ext = <0>;
-    qcom,tdm-max-slots = <8>;
-    qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
-    qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
-    qcom,audio-core-list = <0>, <1>;
-    	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
-			   <&swr_haptics>,
+	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,wcn-bt = <0>;
+	qcom,ext-disp-audio-rx = <0>;
+	qcom,wcn-bt-ext = <0>;
+	qcom,tdm-max-slots = <8>;
+	qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,audio-core-list = <0>, <1>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+				<&rx_swr_haptics>,
 			   <&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
-			   "swr-haptics",
+				"swr-haptics",
 			   "tfa98xx-0034", "tfa98xx-0035";
-
 	qcom,wsa-max-devs = <0>;
 	qcom,wcd-disabled = <1>;
 	qcom,mi2s-audio-intf = <1>;
-	custom-mi2s-audio-intf = <1>;
 	qcom,sen-mi2s-gpios = <&cdc_sen_mi2s_gpios>;
 	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
 	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
@@ -174,7 +173,7 @@
 		"TX DMIC5", "Digital Mic5",
 		"TX DMIC6", "Digital Mic6",
 		"TX DMIC7", "Digital Mic7",
-		"HAP_IN", "WSA2_HAPT OUT",
+		"HAP_IN", "PCM_OUT",
 		"RX_TX DEC0_INP", "TX DEC0 MUX",
 		"RX_TX DEC1_INP", "TX DEC1 MUX",
 		"RX_TX DEC2_INP", "TX DEC2 MUX",
