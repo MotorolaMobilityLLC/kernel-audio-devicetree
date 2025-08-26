@@ -70,7 +70,7 @@
 };
 
 &wsa2_macro {
-	/delete-property/ #cooling-cells;
+	status = "disabled";
 };
 
 &wsa884x_2_0220 {
@@ -116,6 +116,10 @@
     status = "disabled";
 };
 
+&wsa2_swr_gpios {
+    status = "disabled";
+};
+
 &wcd939x_rst_gpio {
 	status = "disabled";
 };
@@ -133,7 +137,7 @@
 };
 
 /* set tfa98xx i2s rx data pin to pull down to avoid random pop noise */
-&i2s0_sd1_active {
+&lpi_i2s2_data0_active {
 	config {
 		bias-pull-down; /* PULL DOWN*/
 	};
