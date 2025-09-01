@@ -164,6 +164,7 @@
 	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
 	qcom,cdc-dmic45-gpios = <&cdc_dmic45_gpios>;
 	qcom,dmic-micbias-en-gpio = <&micbias_en_gpio>;
+	custom-tfa98xx-probe-status = <1>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
 		"TX DMIC1", "Digital Mic1",
