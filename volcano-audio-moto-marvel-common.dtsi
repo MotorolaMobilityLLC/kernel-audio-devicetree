@@ -1,4 +1,5 @@
 #include "volcano-audio-overlay.dtsi"
+#include "volcano-audio-bt-swr.dtsi"
 
 &swr0 {
 	qcom,swr-num-dev = <0>;
@@ -142,8 +143,10 @@
 &pineapple_snd {
 	nvmem-cells = <&adsp_variant>;
 	nvmem-cell-names = "adsp_variant";
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+		<&lpass_cdc>,  <&lpass_bt_swr>;
 	qcom,wcn-bt = <0>;
-	qcom,wcn-btfm = <0>;
+	qcom,wcn-btfm-proxy = <1>;
 	qcom,wcd-disabled = <1>;
 	qcom,audio-routing =
 		"TX DMIC0", "Digital Mic0",
