@@ -24,6 +24,7 @@ dtbo-$(CONFIG_CTWOV_DTB) += pineapple-audio-moto-ctwov-evb.dtbo
 
 dtbo-$(CONFIG_ARCFOX_DTB) += cliffs-audio-moto-arcfox-evt3.dtbo
 dtbo-$(CONFIG_CTWO_DTB) += cliffs-audio-moto-ctwo-evb3.dtbo
+dtbo-$(CONFIG_EIGER_DTB) += cliffs-audio-moto-eiger-evt.dtbo
 
 dtbo-$(CONFIG_MARVEL_DTB) += volcano-audio-moto-marvel-evb.dtbo
 

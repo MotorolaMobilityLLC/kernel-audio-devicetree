@@ -1,0 +1,11 @@
+/dts-v1/;
+/plugin/;
+// This file is copied from: cliffs-audio-moto-arcfox-evt3.dts
+#include "cliffs-audio-moto-arcfox-common.dtsi"
+
+ / {
+	model = "eiger";
+	compatible = "qcom,cliffs-mtp", "qcom,cliffs", "qcom,mtp";
+	qcom,msm-id = <614 0x10000>;
+	qcom,board-id = <0x46 0xA000>;
+};
