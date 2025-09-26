@@ -46,6 +46,10 @@
 	status = "disabled";
 };
 
+&tx_macro {
+	qcom,dec-unmute-delay-ms = <30>;
+};
+
 &rx_macro {
 	qcom,is-used-swr-gpio = <0>;
 };
