@@ -77,7 +77,16 @@
 };
 
 &pm6150l_gpios {
-	aw882xx_reset_default: aw882xx_reset_default {
+	aw882xx_reset1_default: aw882xx_reset1_default {
+		pins = "gpio1";
+		function = "normal";
+		input-disable;
+		output-enable;
+		bias-disable;
+		power-source = <0>;
+		qcom,drive-strength = <2>;
+	};
+	aw882xx_reset2_default: aw882xx_reset2_default {
 		pins = "gpio2";
 		function = "normal";
 		input-disable;
@@ -87,6 +96,7 @@
 		qcom,drive-strength = <2>;
 	};
 };
+
 &swr1 {
 	qcom,swr-num-dev = <3>;
 	swr_haptics: swr_haptics@f0170220 {
@@ -106,7 +116,7 @@
 		reg = <0x34>;
 		reset-gpio = <&pm6150l_gpios 2 0>;
 		pinctrl-names = "default";
-		pinctrl-0 = <&aw882xx_reset_default>;
+		pinctrl-0 = <&aw882xx_reset2_default>;
 		irq-gpio = <&tlmm 104 0x2008>;
 		sound-channel = <1>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
 		aw-re-min = <4000>;
@@ -119,6 +129,9 @@
 	aw882xxacf_rcv: aw882xx_smartpa@35 { /* SPKL */
 		compatible = "awinic,aw882xx_smartpa";
 		reg = <0x35>;
+		reset-gpio = <&pm6150l_gpios 1 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&aw882xx_reset1_default>;
 		irq-gpio = <&tlmm 105 0x2008>;
 		sound-channel = <0>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
 		aw-re-min = <4000>;
