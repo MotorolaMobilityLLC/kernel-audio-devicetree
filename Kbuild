@@ -45,6 +45,8 @@ dtbo-$(CONFIG_VANTG_DTB) += canoe-audio-moto-vantg-evb.dtbo \
                             canoe-audio-moto-vantg-evt1.dtbo
 
 dtbo-$(CONFIG_VANTAGE_DTB) += alor-audio-moto-vantage-dvt1b.dtbo
+
+dtbo-$(CONFIG_AVR_DTB) += alor-audio-moto-avr-evb.dtbo
 else
 
 ifeq ($(CONFIG_ARCH_CANOE), y)
