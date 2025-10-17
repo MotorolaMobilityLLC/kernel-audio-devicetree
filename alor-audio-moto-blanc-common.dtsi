@@ -90,7 +90,6 @@
 		reg = <0x34>;
 		reset-gpio = <&tlmm 182 0>;
 		reset-polarity = <0>;
-		irq-gpio = <&tlmm 22 0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&tfa_rcv_int_default>;
 		status = "okay";
@@ -100,7 +99,6 @@
 		reg = <0x35>;
 		reset-gpio = <&tlmm 183 0>;
 		reset-polarity = <0>;
-		irq-gpio = <&tlmm 202 0>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&tfa_spk_int_default>;
 		status = "okay";
