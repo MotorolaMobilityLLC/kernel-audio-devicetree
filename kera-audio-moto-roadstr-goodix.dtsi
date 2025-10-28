@@ -196,6 +196,8 @@
 			<&tfa98xx_rcv>, <&tfa98xx_spk>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
 			"tfa98xx-0034", "tfa98xx-0035";
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+			  <&lpass_cdc>;
 };
 
 &tlmm {
