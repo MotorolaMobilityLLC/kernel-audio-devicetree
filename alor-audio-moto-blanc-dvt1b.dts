@@ -6,10 +6,10 @@
 /dts-v1/;
 /plugin/;
 
-#include "alor-audio-moto-blanc-common.dtsi"
+#include "alor-audio-moto-blanc-dvt1b.dtsi"
  / {
 	model = "blanc";
 	compatible = "qcom,alor-qrd", "qcom,alor", "qcom,qrd";
 	qcom,msm-id = <685 0x10000>;
-	qcom,board-id = <0x41 0x9100>;
+	qcom,board-id = <0x41 0xB1B0>;
 };
