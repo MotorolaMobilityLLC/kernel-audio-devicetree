@@ -48,8 +48,11 @@
 	status = "disabled";
 };
 
+/delete-node/ &rx_swr_gpios;
+
 &rx_macro {
 	qcom,is-used-swr-gpio = <0>;
+	/delete-property/ qcom,rx-swr-gpios;
 };
 
 &va_macro {
