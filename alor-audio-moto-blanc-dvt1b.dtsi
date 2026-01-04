@@ -91,6 +91,7 @@
 		reset-gpio = <&tlmm 182 0>;
 		reset-polarity = <0>;
 		status = "okay";
+		fw-num = <2>;
 	};
 	tfa98xx_spk: tfa98xx@35 { /* SPKR */
 		compatible = "tfa,tfa98xx";
@@ -98,6 +99,7 @@
 		reset-gpio = <&tlmm 183 0>;
 		reset-polarity = <0>;
 		status = "okay";
+		fw-num = <2>;
 	};
 };
 
