@@ -269,3 +269,16 @@
 		};
 	};
 };
+
+&lpi_dmic0_clk_active {
+                mux {
+                        pins = "gpio6";
+                        function = "func1";
+                };
+
+                config {
+                        pins = "gpio6";
+                        drive-strength = <4>;
+                        output-high;
+                };
+};
