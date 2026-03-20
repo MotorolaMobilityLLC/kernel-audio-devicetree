@@ -42,6 +42,8 @@ dtbo-$(CONFIG_ARCH_CANOE) += canoe-audio.dtbo \
 dtbo-$(CONFIG_BLANC_DTB) += alor-audio-moto-blanc-evb.dtbo\
                             alor-audio-moto-blanc-dvt1b.dtbo
 
+dtbo-$(CONFIG_MAKALU_DTB) += alor-audio-moto-makalu-evb.dtbo
+
 dtbo-$(CONFIG_VANTG_DTB) += canoe-audio-moto-vantg-evb.dtbo \
                             canoe-audio-moto-vantg-evt1.dtbo
 
