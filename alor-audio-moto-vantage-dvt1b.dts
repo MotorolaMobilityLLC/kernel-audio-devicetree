@@ -6,10 +6,12 @@
 /dts-v1/;
 /plugin/;
 
+#define VANTAGE_RADIO_JAPAN 3
+
 #include "alor-audio-moto-vantage-common.dtsi"
  / {
 	model = "vantage";
 	compatible = "qcom,alor-qrd", "qcom,alor", "qcom,qrd";
 	qcom,msm-id = <685 0x10000>;
-	qcom,board-id = <0x41 0xB1B0>, <0x41 0xC000>;
+	qcom,board-id = <0x41 0xB1B0>, <0x41 0xC000>, <(VANTAGE_RADIO_JAPAN <<8 | 0x41) 0xA100>;
 };
