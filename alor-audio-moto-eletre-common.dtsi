@@ -1,0 +1,306 @@
+//
+/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear.
+ */
+
+#include "alor-lpi.dtsi"
+#include "lpass-audio-cdc-1.0.dtsi"
+#include "lpass-audio-bt-swr.dtsi"
+#include "lpass-cdc-gpio.dtsi"
+#include "alor-audio-lpass-reg.dtsi"
+#include "wsa884x.dtsi"
+#include "wcd939x.dtsi"
+
+&wcd_usbss {
+	status = "disabled";
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&wsa884x_0221 {
+	status = "disabled";
+};
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
+&swr0 {
+	status = "disabled";
+};
+
+&swr2 {
+	status = "disabled";
+};
+
+&swr1 {
+	status = "okay";
+	qcom,swr-num-dev = <1>;
+};
+
+&rx_swr_haptics {
+	status = "okay";
+	swr-slave-supply = <&hap_swr_slave_reg>;
+};
+
+&rx_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&va_macro {
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&wsa884x_2_0220 {
+	status = "disabled";
+};
+
+&wsa884x_2_0221 {
+	status = "disabled";
+};
+
+&qupv3_se11_i2c {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	aw882xxacf_rcv: aw882xx_smartpa@34 {
+		compatible = "awinic,aw882xx_smartpa";
+		reg = <0x34>;
+		reset-gpio = <&tlmm 182 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&aw_rcv_int_default &aw882xx_rcv_reset_default>;
+		irq-gpio = <&tlmm 22 0>;
+		sound-channel = <0>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+		aw-re-min = <4000>;
+		aw-re-max= <30000>;
+		rename-flag = <1>;
+		aw-cali-mode = "none";
+		monitor-mode = "kernel_monitor";
+		status = "okay";
+	};
+	aw882xxacf_spk: aw882xx_smartpa@35 {
+		compatible = "awinic,aw882xx_smartpa";
+		reg = <0x35>;
+		reset-gpio = <&tlmm 183 0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&aw_spk_int_default &aw882xx_spk_reset_default>;
+		irq-gpio = <&tlmm 193 0x2008>;
+		sound-channel = <1>; /*0:pri_l 1:pri_r 2:sec_l 3:sec_r*/
+		aw-re-min = <4000>;
+		aw-re-max= <30000>;
+		rename-flag = <1>;
+		aw-cali-mode = "none";
+		monitor-mode = "kernel_monitor";
+		status = "okay";
+	};
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+
+&wsa_swr_gpios {
+    status = "disabled";
+};
+
+&wsa2_swr_gpios {
+    status = "disabled";
+};
+
+&wcd939x_rst_gpio {
+	status = "disabled";
+};
+
+&wcd939x_tx_slave {
+	status = "disabled";
+};
+
+&wcd939x_rx_slave {
+	status = "disabled";
+};
+
+&cdc_sen_mi2s_gpios {
+	status = "ok";
+};
+
+/* set tfa98xx i2s rx data pin to pull down to avoid random pop noise */
+&lpi_i2s2_data0_active {
+	config {
+		bias-pull-down; /* PULL DOWN*/
+	};
+};
+
+&alor_snd {
+	qcom,model = "alor-qrd-snd-card";
+	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,mi2s-tdm-is-hw-vote-needed = <1>, <1>, <1>, <1>, <1>, <1>, <1>;
+	qcom,wcn-bt = <1>;
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,wcn-bt-ext = <0>;
+	qcom,tdm-max-slots = <8>;
+	qcom,tdm-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,mi2s-clk-attribute = <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>, <0x1>;
+	qcom,audio-core-list = <0>, <1>;
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+				<&rx_swr_haptics>,
+			   <&aw882xxacf_rcv>, <&aw882xxacf_spk>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+				"swr-haptics",
+			   "aw882xx_smartpa-0034", "aw882xx_smartpa-0035";
+	qcom,wsa-max-devs = <0>;
+	qcom,wcd-disabled = <1>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,sen-mi2s-gpios = <&cdc_sen_mi2s_gpios>;
+	qcom,cdc-dmic01-gpios = <&cdc_dmic01_gpios>;
+	qcom,cdc-dmic23-gpios = <&cdc_dmic23_gpios>;
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"HAP_IN", "PCM_OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+
+	qcom,msm_audio_ssr_devs = <&audio_gpr>, <&lpi_tlmm>,
+			<&lpass_cdc>, <&lpass_bt_swr>;
+		/*
+		 * ====================
+		 * UPD backend - WSA
+		 * ====================
+		 *
+		 * Mute/Unmute the interpolator
+		 * ------------------------------
+		 * Register: LPASS_WSA_CDC_RX0_RX_PATH_MIX_CTL - 0x6B00418
+		 *
+		 * Send control commands to the peripheral from the soundwire controller
+		 * -----------------------------------------------------------------------
+		 * Register: LPASS_WSA_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x6B14020
+		 *
+		 * Enable/Disable ear piece
+		 * --------------------------
+		 * Register: DIG_CTRL0_PA_FSM_EN - 0x3430
+		 *
+		 *
+		 *	qcom,upd_backends_used = "wsa";
+		 *	qcom,upd_lpass_reg_addr = <0x6B00418 0x6B14020>;
+		 *	qcom,upd_ear_pa_reg_addr = <0x3430>;
+		/*
+		* ====================
+		* UPD backend - WCD
+		* ====================
+		*
+		* Mute/Unmute the interpolator
+		* ------------------------------
+		* Register: LPASS_WCD_CDC_RX0_RX_PATH_MIX_CTL - 0x6AC0418
+		*
+		* Send control commands to the wcd from the soundwire controller
+		* ----------------------------------------------------------------
+		* Register: LPASS_WCD_SWR_MSTR_WSA_SWRM_CPUn_CMD_FIFO_WR_CMD - 0x7634020
+		*
+		* Enable/Disable ear piece
+		* --------------------------
+		* Register: DIG_CTRL0_PA_FSM_EN - 0x300A
+		*
+		*/
+		/*
+		* qcom,upd_backends_used = "wcd";
+		* qcom,upd_lpass_reg_addr = <0x6AC0418 0x7634020>;
+		* qcom,upd_ear_pa_reg_addr = <0x300A>;
+		*/
+};
+
+&tlmm {
+	aw_rcv_int_default: aw_rcv_int_default {
+		mux {
+			pins = "gpio22";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio22";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+
+	aw_spk_int_default: aw_spk_int_default {
+		mux {
+			pins = "gpio193";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio193";
+				bias-pull-up;
+				input-enable;
+		};
+	};
+
+	aw882xx_rcv_reset_default: aw882xx_rcv_reset_default {
+		mux {
+			pins = "gpio182";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio182";
+				bias-disable;
+				output-enable;
+		};
+	};
+
+	aw882xx_spk_reset_default: aw882xx_spk_reset_default {
+		mux {
+			pins = "gpio183";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio183";
+				bias-disable;
+				output-enable;
+		};
+	};
+};
